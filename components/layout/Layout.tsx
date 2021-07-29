@@ -1,4 +1,4 @@
-import { Flex, Link, Text } from "@chakra-ui/react";
+import { Flex, Link, Text, Box } from "@chakra-ui/react";
 import React from "react";
 
 interface IProps {
@@ -9,7 +9,15 @@ export const Layout = ({ children }: IProps) => {
   return (
     <div>
       <Header />
-      <div></div>
+      <Box
+        justifyContent='space-between'
+        alignItems='center'
+        p='6'
+        maxWidth='md'
+        mx='auto'
+      >
+        {children}
+      </Box>
     </div>
   );
 };
