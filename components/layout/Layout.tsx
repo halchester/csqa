@@ -1,5 +1,6 @@
 import { Flex, Link, Text, Box } from "@chakra-ui/react";
 import React from "react";
+import { SmallText } from "../utils";
 
 interface IProps {
   children: React.ReactNode;
@@ -18,6 +19,7 @@ export const Layout = ({ children }: IProps) => {
       >
         {children}
       </Box>
+      <Config />
     </div>
   );
 };
@@ -33,7 +35,7 @@ const Header = () => {
     >
       <div>
         <Text as='span' fontSize='lg'>
-          csqa
+          <Link href='/'>csqa</Link>
         </Text>
       </div>
       <div>
@@ -51,6 +53,24 @@ const Header = () => {
           </Text>
         </Link>
       </div>
+    </Flex>
+  );
+};
+
+const Config = () => {
+  return (
+    <Flex
+      justifyContent='space-around'
+      alignItems='center'
+      maxWidth='md'
+      mx='auto'
+    >
+      <SmallText link='/signup'>Log In/ Sign Up</SmallText>
+      {/* <SmallText link='/leaderboard'>Leaderboard </SmallText> */}
+      {/* <SmallText link='/creator'>Creator </SmallText> */}
+      <SmallText link='https://github.com/halchester/csqa'>
+        Source Code{" "}
+      </SmallText>
     </Flex>
   );
 };
