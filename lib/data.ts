@@ -169,7 +169,7 @@ export const data = [
   },
   {
     id: 1,
-    question: "Vue or next?",
+    question: "asdfasdf or next?",
     user: "Chester",
     uploaded: new Date(),
     upvote: 4,
@@ -177,7 +177,7 @@ export const data = [
   },
   {
     id: 2,
-    question: "JS or TS ",
+    question: "adsfadsf or TS ",
     user: "Raymond",
     uploaded: new Date(),
     upvote: 0,
@@ -209,7 +209,7 @@ export const data = [
   },
   {
     id: 3,
-    question: "Rust or golang",
+    question: "asdfasdfgrgrtgrg or golang",
     user: "Vix",
     uploaded: new Date(),
     upvote: 3,
@@ -217,7 +217,7 @@ export const data = [
   },
   {
     id: 1,
-    question: "Vue or next?",
+    question: "asdfasdf or next?",
     user: "Chester",
     uploaded: new Date(),
     upvote: 4,
@@ -225,7 +225,7 @@ export const data = [
   },
   {
     id: 2,
-    question: "JS or TS ",
+    question: "ftyjftjytf or TS ",
     user: "Raymond",
     uploaded: new Date(),
     upvote: 0,
@@ -233,7 +233,7 @@ export const data = [
   },
   {
     id: 3,
-    question: "Rust or golang",
+    question: "Rfjftuyjtyfjust or golang",
     user: "Vix",
     uploaded: new Date(),
     upvote: 3,
