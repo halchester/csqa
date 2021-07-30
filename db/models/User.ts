@@ -20,9 +20,12 @@ const UserSchema = new Schema<UserDoc>(
       type: String,
       required: true,
     },
-    questions: {
-      type: Schema.Types.Array,
-    },
+    questions: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Question",
+      },
+    ],
     userId: {
       type: String,
     },

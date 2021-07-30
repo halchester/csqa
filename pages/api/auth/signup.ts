@@ -44,15 +44,15 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
       password: hashedPassword,
     };
 
-    try {
-      const newUser = new User(payload);
-      const response = await newUser.save();
-      if (response) {
+    const newUser = new User(payload);
+    await newUser
+      .save()
+      .then((response: Response) => {
         return res.status(200).json({ success: true, data: response });
-      }
-    } catch (err) {
-      return res.status(400).json({ success: false, error: err });
-    }
+      })
+      .catch((err: Error) => {
+        return res.status(200).json({ success: false, error: err });
+      });
   } catch (err) {
     console.log(err);
     res.status(400).json({ success: false, error: "Something went wrong!" });
