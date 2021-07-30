@@ -1,11 +1,21 @@
 import * as React from "react";
 import { Layout } from "../components/layout/Layout";
-import { Button, FormLabel, Input, Text, Box, Link } from "@chakra-ui/react";
+import {
+  Button,
+  FormLabel,
+  Input,
+  Text,
+  Box,
+  Link,
+  useToast,
+  Stack,
+} from "@chakra-ui/react";
 import { Formik } from "formik";
 import axios from "../lib/api";
 
 const SignupPage = () => {
   const [loading, setLoading] = React.useState(false);
+  const toast = useToast();
 
   return (
     <Layout>
@@ -27,75 +37,87 @@ const SignupPage = () => {
           const payload = { fullName, email, password, username };
           try {
             const response = await axios.post("/api/auth/signup", payload);
-            console.log(response.data);
+            toast({
+              status: "success",
+              title: "Account registered!",
+              description: `Your account with ${response.data.username} has been successfully registered!`,
+              isClosable: true,
+              duration: 9000,
+            });
             setLoading(false);
-            // resetForm();
+            resetForm();
           } catch (err) {
-            console.log(err.response.data);
+            toast({
+              status: "error",
+              description: `${err.response.data.error}`,
+              isClosable: true,
+              duration: 9000,
+            });
             setLoading(false);
           }
         }}
       >
         {({ values, handleChange, handleBlur, handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Box mb='2'>
-              <FormLabel>Username</FormLabel>
-              <Input
-                name='username'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.username}
-              />
-            </Box>
-            <Box mb='2'>
-              <FormLabel>Email</FormLabel>
-              <Input
-                name='email'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-              />
-            </Box>
-            <Box mb='2'>
-              <FormLabel>Full Name</FormLabel>
-              <Input
-                name='fullName'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.fullName}
-              />
-            </Box>
-            <Box mb='2'>
-              <FormLabel>Password</FormLabel>
-              <Input
-                name='password'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-              />
-            </Box>
-            <Box mb='2'>
-              <FormLabel>Re-enter Password</FormLabel>
-              <Input
-                name='repassword'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.repassword}
-              />
-            </Box>
-            <Button
-              mb='2'
-              onClick={() => handleSubmit()}
-              isFullWidth
-              colorScheme='green'
-              isLoading={loading}
-            >
-              Continue
-            </Button>
+            <Stack spacing={2}>
+              <Box>
+                <FormLabel>Username</FormLabel>
+                <Input
+                  name='username'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.username}
+                />
+              </Box>
+              <Box>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  name='email'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                />
+              </Box>
+              <Box>
+                <FormLabel>Full Name</FormLabel>
+                <Input
+                  name='fullName'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.fullName}
+                />
+              </Box>
+              <Box>
+                <FormLabel>Password</FormLabel>
+                <Input
+                  name='password'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                />
+              </Box>
+              <Box>
+                <FormLabel>Re-enter Password</FormLabel>
+                <Input
+                  name='repassword'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.repassword}
+                />
+              </Box>
+              <Button
+                onClick={() => handleSubmit()}
+                isFullWidth
+                colorScheme='green'
+                isLoading={loading}
+              >
+                Continue
+              </Button>
+            </Stack>
           </form>
         )}
       </Formik>
-      <Button variant='ghost' isFullWidth>
+      <Button variant='ghost' isFullWidth mt='2'>
         <Link href='login'>Log In</Link>
       </Button>
     </Layout>
