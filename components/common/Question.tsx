@@ -20,51 +20,40 @@ export const Question = ({ question }: IProps) => {
   return (
     <Box mb='4'>
       <Flex justifyContent='space-between' alignItems='center'>
-        <Text fontSize='lg'>{question.question}</Text>
+        <Text fontSize='lg'>{question.title}</Text>
         <Box>
           <Box as='span'>
             <IconButton
               size='xs'
               aria-label='upvote'
               icon={<ArrowUpIcon fontWeight='bold' />}
-              onClick={() => upvoteQuestion(question.id)}
+              onClick={() => upvoteQuestion(question.questionId)}
             />
             <Text
               as='span'
               fontSize='sm'
               color='gray.500'
-              ml='1'
+              mx='2'
               fontWeight='bold'
             >
-              {question.upvote}
+              {question.points}
             </Text>
-          </Box>
-          <Box as='span' ml='2'>
             <IconButton
               size='xs'
               aria-label='downvote'
               icon={<ArrowDownIcon fontWeight='bold' />}
-              onClick={() => downvoteQuestin(question.id)}
+              onClick={() => downvoteQuestin(question.questionId)}
             />
-            <Text
-              as='span'
-              fontSize='sm'
-              color='gray.500'
-              ml='1'
-              fontWeight='bold'
-            >
-              {question.downvote}
-            </Text>
           </Box>
         </Box>
       </Flex>
       <Text as='span' fontSize='sm' color='gray.500'>
         {" "}
-        {question.user}
+        {question.author.username}
       </Text>
       <Text as='span' fontSize='sm' color='gray.500'>
         {" | "}
-        {moment(question.uploaded).format("DD-MM-YYYY")}
+        {moment(question.createdAt).format("DD-MM-YYYY")}
       </Text>
     </Box>
   );
