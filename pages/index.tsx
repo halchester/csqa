@@ -1,12 +1,11 @@
 import * as React from "react";
 import { Question } from "../components/common/Question";
 import { Layout } from "../components/layout/Layout";
-import { data } from "../lib/data";
 import { QUESTIONS_PER_PAGE } from "../constants/common";
 import { Pagination } from "../components/common/Pagination";
 
 const IndexPage = () => {
-  const [questions] = React.useState(data);
+  const [questions] = React.useState([]);
   const [currPage, setCurrPage] = React.useState(1);
 
   let indexOfLastQuestion = currPage * QUESTIONS_PER_PAGE;

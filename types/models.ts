@@ -5,7 +5,7 @@ export type QuestionDoc = Document & {
   body: string;
   author: UserDoc;
   createdAt: Date;
-  uniqueId: string;
+  questionId: string;
 };
 
 export type UserDoc = Document & {

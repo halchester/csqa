@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import mongoose, { model, Schema } from "mongoose";
 import shortid from "shortid";
 import { UserDoc } from "../../types/models";
 
@@ -20,12 +20,11 @@ const UserSchema = new Schema<UserDoc>(
       type: String,
       required: true,
     },
+    questions: {
+      type: Schema.Types.Array,
+    },
     userId: {
       type: String,
-    },
-    questions: {
-      type: Schema.Types.ObjectId,
-      default: [],
     },
   },
   {
@@ -34,13 +33,13 @@ const UserSchema = new Schema<UserDoc>(
 );
 
 UserSchema.pre<UserDoc>("save", function (next) {
-  let question = this;
-  if (!question.userId) {
-    question.userId = shortid.generate();
+  let user = this;
+  if (!user.userId) {
+    user.userId = shortid.generate();
   }
   next();
 });
 
-const User = model<UserDoc>("User", UserSchema);
+const User = mongoose.models.User || model<UserDoc>("User", UserSchema);
 
 export default User;

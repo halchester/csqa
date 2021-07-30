@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import mongoose, { model, Schema } from "mongoose";
 import shortid from "shortid";
 import { QuestionDoc } from "../../types/models";
 
@@ -26,8 +26,13 @@ const QuestionSchema = new Schema<QuestionDoc>({
 
 QuestionSchema.pre<QuestionDoc>("save", function (next) {
   let question = this;
-  if (!question.uniqueId) {
-    question.uniqueId = shortid.generate();
+  if (!question.questionId) {
+    question.questionId = shortid.generate();
   }
   next();
 });
+
+const Question =
+  mongoose.models.Question || model<QuestionDoc>("Question", QuestionSchema);
+
+export default Question;
