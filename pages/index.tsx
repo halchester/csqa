@@ -31,7 +31,9 @@ const IndexPage = () => {
           {currQuestions.map((question: QuestionT, idx: number) => (
             <Question question={question} key={idx} />
           ))}
-          <Pagination totalQuestions={questions.length} paginate={paginate} />
+          {questions.length > 8 ? (
+            <Pagination totalQuestions={questions.length} paginate={paginate} />
+          ) : null}
         </>
       ) : null}
       {}

@@ -1,4 +1,4 @@
-import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Link, Text } from "@chakra-ui/react";
 import * as React from "react";
 import moment from "moment";
 import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
@@ -20,7 +20,11 @@ export const Question = ({ question }: IProps) => {
   return (
     <Box mb='4'>
       <Flex justifyContent='space-between' alignItems='center'>
-        <Text fontSize='lg'>{question.title}</Text>
+        <Text fontSize='lg'>
+          <Link href={`/question/${question.questionId}`}>
+            {question.title}
+          </Link>
+        </Text>
         <Box>
           <Box as='span'>
             <IconButton
@@ -53,7 +57,7 @@ export const Question = ({ question }: IProps) => {
       </Text>
       <Text as='span' fontSize='sm' color='gray.500'>
         {" | "}
-        {moment(question.createdAt).format("DD-MM-YYYY")}
+        {moment(question.createdAt).fromNow()}
       </Text>
     </Box>
   );
