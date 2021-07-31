@@ -1,18 +1,24 @@
 import User from "../../db/models/User";
 
+export const findUserById = async (userId: string) => {
+  try {
+    return await User.findOne({ _id: userId });
+  } catch (err) {
+    return err;
+  }
+};
+
 export const findUserByUsername = async (username: string) => {
   try {
-    const user = await User.findOne({ username });
-    return user;
+    return await User.findOne({ username });
   } catch (err) {
-    return false;
+    return err;
   }
 };
 
 export const findUserByEmail = async (email: string) => {
   try {
-    const user = await User.findOne({ email: email });
-    return user;
+    return await User.findOne({ email });
   } catch (err) {
     return err;
   }
