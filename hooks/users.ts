@@ -1,12 +1,14 @@
 import { useQuery } from "react-query";
 import axios from "../lib/api";
+import { User } from "../types/common";
 
 const getCurrentUser = async () => {
   const res = await axios.get("/api/auth/currentUser");
-  return res.data;
+  return res.data.data;
 };
 
 export const useUser = () => {
-  const { data, isLoading, refetch } = useQuery("user", getCurrentUser);
-  return [data, { refetch }];
+  const { data, refetch, isLoading } = useQuery("user", getCurrentUser);
+  const user = data;
+  return [user, isLoading, { refetch }];
 };

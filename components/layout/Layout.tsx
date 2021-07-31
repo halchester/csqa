@@ -1,6 +1,7 @@
 import { Flex, Link, Text, Box } from "@chakra-ui/react";
 import React from "react";
 import { SmallText } from "../utils";
+import { useUser } from "../../hooks/users";
 
 interface IProps {
   children: React.ReactNode;
@@ -14,7 +15,7 @@ export const Layout = ({ children }: IProps) => {
         justifyContent='space-between'
         alignItems='center'
         p='6'
-        maxWidth='md'
+        maxWidth='lg'
         mx='auto'
       >
         {children}
@@ -47,7 +48,7 @@ const Header = () => {
         <Text as='span' fontSize='md' color='gray.500'>
           &nbsp; | &nbsp;
         </Text>
-        <Link href='/new'>
+        <Link href='/question/new'>
           <Text as='span' fontSize='md' color='gray.500'>
             New Question
           </Text>
@@ -58,6 +59,7 @@ const Header = () => {
 };
 
 const Config = () => {
+  const [user] = useUser();
   return (
     <Flex
       justifyContent='space-around'
@@ -65,7 +67,11 @@ const Config = () => {
       maxWidth='md'
       mx='auto'
     >
-      <SmallText link='/signup'>Log In/ Sign Up</SmallText>
+      {user ? (
+        <SmallText link='/bio'>{user.username} / Logout</SmallText>
+      ) : (
+        <SmallText link='/signup'>Log In/ Sign Up</SmallText>
+      )}
       {/* <SmallText link='/leaderboard'>Leaderboard </SmallText> */}
       {/* <SmallText link='/creator'>Creator </SmallText> */}
       <SmallText link='https://github.com/halchester/csqa'>

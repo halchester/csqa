@@ -3,15 +3,10 @@ import { Question } from "../components/common/Question";
 import { Layout } from "../components/layout/Layout";
 import { QUESTIONS_PER_PAGE } from "../constants/common";
 import { Pagination } from "../components/common/Pagination";
-import axios from "../lib/api";
-import { useUser } from "../hooks/users";
 
 const IndexPage = () => {
   const [questions] = React.useState([]);
   const [currPage, setCurrPage] = React.useState(1);
-  const [user, { refetch }] = useUser();
-
-  // console.log(user);
 
   let indexOfLastQuestion = currPage * QUESTIONS_PER_PAGE;
   let indexOfFirstQuestion = indexOfLastQuestion - QUESTIONS_PER_PAGE;
