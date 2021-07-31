@@ -2,27 +2,39 @@ import mongoose, { model, Schema } from "mongoose";
 import shortid from "shortid";
 import { QuestionDoc } from "../../types/models";
 
-const QuestionSchema = new Schema<QuestionDoc>({
-  title: {
-    type: String,
-    required: true,
+const QuestionSchema = new Schema<QuestionDoc>(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    body: {
+      type: String,
+      required: true,
+    },
+    points: {
+      type: Number,
+      default: 0,
+    },
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
+    author: {
+      // required: true,
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    questionId: {
+      type: String,
+    },
   },
-  body: {
-    type: String,
-    required: true,
-  },
-  author: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-  createdAt: {
-    type: Date,
-    required: true,
-  },
-  questionId: {
-    type: String,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 QuestionSchema.pre<QuestionDoc>("save", function (next) {
   let question = this;

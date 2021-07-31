@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
 import axios from "../lib/api";
-import { User } from "../types/common";
 
 const getCurrentUser = async () => {
   const res = await axios.get("/api/auth/currentUser");

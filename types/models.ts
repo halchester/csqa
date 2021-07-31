@@ -6,6 +6,7 @@ export type QuestionDoc = Document & {
   author: UserDoc;
   createdAt: Date;
   questionId: string;
+  comments: CommentDoc[];
 };
 
 export type UserDoc = Document & {
@@ -16,3 +17,5 @@ export type UserDoc = Document & {
   userId: string;
   questions: QuestionDoc[];
 };
+
+export type CommentDoc = any;

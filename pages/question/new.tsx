@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layout } from "../../components/layout/Layout";
 import {
   Box,
@@ -9,11 +9,19 @@ import {
   Text,
   Textarea,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import { CustomEditor } from "../../components/common/CustomEditor";
 import { Formik } from "formik";
+import axios from "../../lib/api";
+import { useUser } from "../../hooks/users";
 
 const NewQuestionPage = () => {
+  const [loading, setLoading] = useState(false);
+  const [user] = useUser();
+  const toast = useToast();
+  // console.log(user);
+
   return (
     <Layout>
       <Box my='4'>
@@ -27,8 +35,30 @@ const NewQuestionPage = () => {
       </Box>
       <Formik
         initialValues={formikInitialValues}
-        onSubmit={async (values) => {
-          console.log(values);
+        onSubmit={async ({ title, body }) => {
+          setLoading(true);
+          const payload = { title, body, author: user };
+          try {
+            const response = await axios.post("/api/question", payload);
+            setLoading(false);
+            toast({
+              status: "success",
+              title: "Uploaded!",
+              description: "Your question has been successfully uploaded!",
+              isClosable: true,
+              duration: 4000,
+            });
+          } catch (err) {
+            console.log(err);
+            setLoading(false);
+            toast({
+              status: "error",
+              title: "Oh what a bummer!",
+              description: "Something went wrong! :(",
+              isClosable: true,
+              duration: 4000,
+            });
+          }
         }}
       >
         {({ values, handleChange, handleBlur, handleSubmit }) => (
@@ -55,6 +85,7 @@ const NewQuestionPage = () => {
                 colorScheme='green'
                 isFullWidth
                 onClick={() => handleSubmit()}
+                isLoading={loading}
               >
                 Upload!
               </Button>

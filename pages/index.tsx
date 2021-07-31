@@ -3,14 +3,17 @@ import { Question } from "../components/common/Question";
 import { Layout } from "../components/layout/Layout";
 import { QUESTIONS_PER_PAGE } from "../constants/common";
 import { Pagination } from "../components/common/Pagination";
+import { useQuestion } from "../hooks/question";
+import { Question as QuestionT } from "../types/common";
+import { Center, CircularProgress } from "@chakra-ui/react";
 
 const IndexPage = () => {
-  const [questions] = React.useState([]);
   const [currPage, setCurrPage] = React.useState(1);
+  const [questions, isLoading] = useQuestion();
 
   let indexOfLastQuestion = currPage * QUESTIONS_PER_PAGE;
   let indexOfFirstQuestion = indexOfLastQuestion - QUESTIONS_PER_PAGE;
-  let currQuestions = questions.slice(
+  let currQuestions = questions?.slice(
     indexOfFirstQuestion,
     indexOfLastQuestion
   );
@@ -19,10 +22,19 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      {currQuestions.map((question, idx) => (
-        <Question question={question} key={idx} />
-      ))}
-      <Pagination totalQuestions={questions.length} paginate={paginate} />
+      {isLoading ? (
+        <Center>
+          <CircularProgress isIndeterminate />
+        </Center>
+      ) : questions ? (
+        <>
+          {currQuestions.map((question: QuestionT, idx: number) => (
+            <Question question={question} key={idx} />
+          ))}
+          <Pagination totalQuestions={questions.length} paginate={paginate} />
+        </>
+      ) : null}
+      {}
     </Layout>
   );
 };
