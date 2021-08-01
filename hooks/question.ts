@@ -11,3 +11,8 @@ export const useQuestion = () => {
   const questions = data;
   return [questions, isLoading, { refetch }];
 };
+
+export const getQuestionDetail = async ({ queryKey }: any) => {
+  const res = await axios.get(`/api/question/${queryKey[1]}`);
+  return res.data.data;
+};
