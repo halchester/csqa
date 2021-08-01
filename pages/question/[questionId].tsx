@@ -14,6 +14,8 @@ const CustomQuestionDetailPage = () => {
     getQuestionDetail
   );
 
+  console.log(data);
+
   return (
     <Layout>
       {error ? (
@@ -27,7 +29,7 @@ const CustomQuestionDetailPage = () => {
       ) : data !== null ? (
         <>
           <QuestionDetail question={data} />
-          <CommentSection />
+          <CommentSection comments={data.comments} />
         </>
       ) : null}
     </Layout>
