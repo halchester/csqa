@@ -1,8 +1,8 @@
 import { connect, ConnectionOptions } from "mongoose";
 
 const options: ConnectionOptions = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  useFindAndModify: true,
+  useCreateIndex: true,
 };
 
 export default async function database(

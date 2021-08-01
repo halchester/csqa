@@ -49,9 +49,9 @@ export const CommentSection = ({ comments }: IProps) => {
             You have to <Link href='/login'>log in</Link> to comment.
           </Text>
         )}
-        {/* {comments.map((cmt, idx) => (
+        {comments.map((cmt, idx) => (
           <Comment comment={cmt} key={idx} />
-        ))} */}
+        ))}
       </Stack>
     </Box>
   );

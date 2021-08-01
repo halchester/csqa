@@ -11,9 +11,15 @@ handler.use(middleware);
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { questionId } = req.query;
-    const data = await Question.findOne({ questionId }).populate({
-      path: "author",
-    });
+    const data = await Question.findOne({ questionId })
+      .populate("author")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "author",
+        },
+      });
+
     return res.status(200).json({ success: true, data });
   } catch (err) {
     console.log(err);
@@ -36,7 +42,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     const newComment = new Comment({ comment, author });
-    const response = await newComment.save();
+    const commentRes = await newComment.save();
 
     await Question.findOne({ questionId })
       .populate("comments")
@@ -52,12 +58,12 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
           },
           {
             $push: {
-              comments: response,
+              comments: commentRes,
             },
           }
         );
       });
-    return res.status(200).json({ success: true, data: response });
+    return res.status(200).json({ success: true, data: commentRes });
   } catch (err) {
     console.log(err);
     return res.status(400).json({ success: false, error: err });

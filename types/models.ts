@@ -18,4 +18,9 @@ export type UserDoc = Document & {
   questions: QuestionDoc[];
 };
 
-export type CommentDoc = any;
+export type CommentDoc = Document & {
+  comment: string;
+  points: number;
+  author: UserDoc;
+  commentId: string;
+};

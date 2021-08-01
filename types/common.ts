@@ -21,4 +21,11 @@ export type User = {
   _id: string;
 };
 
-export type Comment = any;
+export type Comment = {
+  comment: string;
+  points: number;
+  author: User;
+  commentId: string;
+  createdAt: Date;
+  updatedAt: Date;
+};

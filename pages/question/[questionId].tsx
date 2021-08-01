@@ -14,8 +14,6 @@ const CustomQuestionDetailPage = () => {
     getQuestionDetail
   );
 
-  console.log(data);
-
   return (
     <Layout>
       {error ? (
