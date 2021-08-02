@@ -36,7 +36,6 @@ const IndexPage = () => {
           ) : null}
         </>
       ) : null}
-      {}
     </Layout>
   );
 };

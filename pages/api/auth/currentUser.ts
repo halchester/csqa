@@ -1,6 +1,7 @@
 import nc from "next-connect";
 import middleware from "../../../middlewares/middleware";
 import { NextApiRequest, NextApiResponse } from "next";
+import User from "../../../db/models/User";
 
 const handler = nc();
 handler.use(middleware);
@@ -14,7 +15,10 @@ handler.get(async (req: ExtendedRequest, res: NextApiResponse) => {
   if (!req.user) {
     return res.json({ user: null });
   }
-  return res.json({ data: req.user });
+  const data = await User.findOne({ userId: req.user.userId }).populate(
+    "questions"
+  );
+  return res.json({ data: data });
 });
 
 export default handler;
