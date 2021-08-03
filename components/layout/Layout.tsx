@@ -60,6 +60,7 @@ const Header = () => {
 
 const Config = () => {
   const userData = useUserData((state) => state.userData);
+  console.log(userData);
   return (
     <Flex
       justifyContent='space-around'
@@ -70,7 +71,7 @@ const Config = () => {
       {userData ? (
         <SmallText link='/bio'>{userData?.username} / Logout</SmallText>
       ) : (
-        <SmallText link='/signup'>Log In/ Sign Up</SmallText>
+        <SmallText link='/login'>Log In/ Sign Up</SmallText>
       )}
       {/* <SmallText link='/leaderboard'>Leaderboard </SmallText> */}
       {/* <SmallText link='/creator'>Creator </SmallText> */}

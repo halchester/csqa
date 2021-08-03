@@ -40,7 +40,7 @@ const BioPage = (): JSX.Element => {
   return (
     <Layout>
       {isLoading ? (
-        <Text align='center' color='green'>
+        <Text align='center' color='green' my='6'>
           Please wait loading!
         </Text>
       ) : (
