@@ -12,6 +12,7 @@ const QuestionSchema = new Schema<QuestionDoc>(
       type: String,
       required: true,
     },
+    // voters: [],
     points: {
       type: Number,
       default: 0,
@@ -37,9 +38,8 @@ const QuestionSchema = new Schema<QuestionDoc>(
 );
 
 QuestionSchema.pre<QuestionDoc>("save", function (next) {
-  let question = this;
-  if (!question.questionId) {
-    question.questionId = shortid.generate();
+  if (!this.questionId) {
+    this.questionId = shortid.generate();
   }
   next();
 });

@@ -60,7 +60,6 @@ const Header = () => {
 
 const Config = () => {
   const userData = useUserData((state) => state.userData);
-  console.log(userData);
   return (
     <Flex
       justifyContent='space-around'

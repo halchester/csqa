@@ -8,10 +8,6 @@ const CommentSchema = new Schema<CommentDoc>(
       type: String,
       required: true,
     },
-    points: {
-      type: Number,
-      default: 0,
-    },
     author: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -24,9 +20,8 @@ const CommentSchema = new Schema<CommentDoc>(
 );
 
 CommentSchema.pre<CommentDoc>("save", function (next) {
-  let comment = this;
-  if (!comment.commentId) {
-    comment.commentId = shortid.generate();
+  if (!this.commentId) {
+    this.commentId = shortid.generate();
   }
   next();
 });

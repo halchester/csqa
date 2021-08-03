@@ -36,9 +36,8 @@ const UserSchema = new Schema<UserDoc>(
 );
 
 UserSchema.pre<UserDoc>("save", function (next) {
-  let user = this;
-  if (!user.userId) {
-    user.userId = shortid.generate();
+  if (!this.userId) {
+    this.userId = shortid.generate();
   }
   next();
 });

@@ -24,3 +24,13 @@ export type CommentDoc = Document & {
   author: UserDoc;
   commentId: string;
 };
+
+export type UpvoteDoc = Document & {
+  questionId: QuestionDoc;
+  votes: UserDoc[];
+};
+
+export type DownvoteDoc = Document & {
+  questionId: QuestionDoc;
+  votes: UserDoc[];
+};
