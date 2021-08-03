@@ -2,7 +2,6 @@ import { Box, Text, Stack, Link } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { Comment as CommentT } from "../../types/common";
 import { Comment } from "./Comment";
-import { useUser } from "../../hooks/users";
 import axios from "../../lib/api";
 import { useRouter } from "next/dist/client/router";
 import { AddComment } from "./AddComment";
@@ -12,7 +11,7 @@ type IProps = {
   comments: CommentT[];
 };
 
-export const CommentSection = ({ comments }: IProps) => {
+export const CommentSection = ({ comments }: IProps): JSX.Element => {
   const userData = useUserData((state) => state.userData);
   const router = useRouter();
   const [comment, setComment] = useState("");

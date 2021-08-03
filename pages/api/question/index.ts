@@ -18,12 +18,12 @@ handler.get(async (_req: NextApiRequest, res: NextApiResponse) => {
 });
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
-  const { title, body, author } = req.body;
-  const payload = {
-    title,
-    body,
-    author,
-  };
+  // const { title, body, author } = req.body;
+  // const payload = {
+  //   title,
+  //   body,
+  //   author,
+  // };
   try {
     const newQ = new Question(req.body);
     const response = await newQ.save();

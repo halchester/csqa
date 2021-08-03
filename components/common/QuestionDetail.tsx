@@ -7,7 +7,7 @@ type IProps = {
   question: Question;
 };
 
-export const QuestionDetail = ({ question }: IProps) => {
+export const QuestionDetail = ({ question }: IProps): JSX.Element => {
   return (
     <>
       <Text fontSize='2xl'>{question.title}</Text>

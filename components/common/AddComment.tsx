@@ -14,7 +14,7 @@ export const AddComment = ({
   comment,
   setComment,
   postComment,
-}: IProps) => {
+}: IProps): JSX.Element => {
   return (
     <Flex>
       <Input

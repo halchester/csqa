@@ -7,7 +7,7 @@ import { Center, CircularProgress, Text } from "@chakra-ui/react";
 import { QuestionDetail } from "../../components/common/QuestionDetail";
 import { CommentSection } from "../../components/common/CommentSection";
 
-const CustomQuestionDetailPage = () => {
+const CustomQuestionDetailPage = (): JSX.Element => {
   const router = useRouter();
   const { data, isLoading, error } = useQuery(
     ["detail", router.query.questionId],

@@ -16,7 +16,7 @@ import axios from "../lib/api";
 import { useRouter } from "next/dist/client/router";
 import { useUserData } from "../store/userStore";
 
-const BioPage = ({}) => {
+const BioPage = (): JSX.Element => {
   const [user, isLoading] = useUser();
   const [loading, setLoading] = useState(false);
   const removeUserData = useUserData((state) => state.removeUserData);
@@ -72,7 +72,7 @@ const BioPage = ({}) => {
                   </Link>
                 </Text>
                 <Box>
-                  <Text as='span'>Points : </Text>
+                  <Text as='span'>Points :</Text>
                   <Badge ml='3' colorScheme='orange'>
                     {question.points}
                   </Badge>

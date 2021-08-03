@@ -46,7 +46,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
 
     await Question.findOne({ questionId })
       .populate("comments")
-      .exec(async (error, response) => {
+      .exec(async (error) => {
         if (error) {
           console.log(error);
           return res.status(400).json({ success: false, error });

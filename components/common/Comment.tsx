@@ -7,7 +7,7 @@ type IProps = {
   comment: CommentT;
 };
 
-export const Comment = ({ comment }: IProps) => {
+export const Comment = ({ comment }: IProps): JSX.Element => {
   return (
     <Box>
       <Text>{comment.comment}</Text>

@@ -15,7 +15,7 @@ import axios from "../../lib/api";
 import { useUserData } from "../../store/userStore";
 import { useRouter } from "next/dist/client/router";
 
-const NewQuestionPage = () => {
+const NewQuestionPage = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const userData = useUserData((state) => state.userData);
   const toast = useToast();
@@ -44,7 +44,7 @@ const NewQuestionPage = () => {
           setLoading(true);
           const payload = { title, body, author: userData };
           try {
-            const response = await axios.post("/api/question", payload);
+            await axios.post("/api/question", payload);
             setLoading(false);
             toast({
               status: "success",

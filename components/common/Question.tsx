@@ -8,7 +8,7 @@ interface IProps {
   question: QuestionT;
 }
 
-export const Question = ({ question }: IProps) => {
+export const Question = ({ question }: IProps): JSX.Element => {
   const upvoteQuestion = (id: number) => {
     console.log(id);
   };

@@ -9,7 +9,7 @@ import { Center, CircularProgress } from "@chakra-ui/react";
 import { useUser } from "../hooks/users";
 import { useUserData } from "../store/userStore";
 
-const IndexPage = () => {
+const IndexPage = (): JSX.Element => {
   const [currPage, setCurrPage] = React.useState(1);
   const [questions, isLoading] = useQuestion();
   const setUserData = useUserData((state) => state.setUserData);

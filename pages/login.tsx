@@ -13,7 +13,7 @@ import { Formik } from "formik";
 import axios from "../lib/api";
 import { useRouter } from "next/dist/client/router";
 
-const LoginPage = () => {
+const LoginPage = (): JSX.Element => {
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
 

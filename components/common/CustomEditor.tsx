@@ -13,9 +13,7 @@ export const CustomEditor = ({
   name,
   handleChange,
   value,
-  isOpen,
-  onClose,
-}: IProps) => {
+}: IProps): JSX.Element => {
   return (
     <>
       <Textarea value={value} onChange={handleChange} name={name} />

@@ -13,7 +13,7 @@ import {
 import { Formik } from "formik";
 import axios from "../lib/api";
 
-const SignupPage = () => {
+const SignupPage = (): JSX.Element => {
   const [loading, setLoading] = React.useState(false);
   const toast = useToast();
 

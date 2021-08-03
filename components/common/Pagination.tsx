@@ -1,13 +1,16 @@
 import * as React from "react";
 import { QUESTIONS_PER_PAGE } from "../../constants/common";
-import { Box, Button, Flex, IconButton } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 
 interface IProps {
   totalQuestions: number;
   paginate: (num: number) => void;
 }
 
-export const Pagination = ({ totalQuestions, paginate }: IProps) => {
+export const Pagination = ({
+  totalQuestions,
+  paginate,
+}: IProps): JSX.Element => {
   let numbers = [];
   for (let i = 1; i <= Math.ceil(totalQuestions / QUESTIONS_PER_PAGE); i++) {
     numbers.push(i);

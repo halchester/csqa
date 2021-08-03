@@ -1,6 +1,7 @@
 import User from "../../db/models/User";
+import { User as UserT } from "../../types/common";
 
-export const findUserById = async (userId: string) => {
+export const findUserById = async (userId: string): Promise<UserT> => {
   try {
     return await User.findOne({ _id: userId });
   } catch (err) {
@@ -8,7 +9,7 @@ export const findUserById = async (userId: string) => {
   }
 };
 
-export const findUserByUsername = async (username: string) => {
+export const findUserByUsername = async (username: string): Promise<UserT> => {
   try {
     return await User.findOne({ username });
   } catch (err) {
@@ -16,7 +17,7 @@ export const findUserByUsername = async (username: string) => {
   }
 };
 
-export const findUserByEmail = async (email: string) => {
+export const findUserByEmail = async (email: string): Promise<UserT> => {
   try {
     return await User.findOne({ email });
   } catch (err) {
@@ -24,7 +25,8 @@ export const findUserByEmail = async (email: string) => {
   }
 };
 
-export const checkFields = async (payload: any) => {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const checkFields = (payload: any): boolean => {
   if (
     payload.username &&
     payload.fullName &&
