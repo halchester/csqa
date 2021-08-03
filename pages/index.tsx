@@ -6,10 +6,20 @@ import { Pagination } from "../components/common/Pagination";
 import { useQuestion } from "../hooks/question";
 import { Question as QuestionT } from "../types/common";
 import { Center, CircularProgress } from "@chakra-ui/react";
+import { useUser } from "../hooks/users";
+import { useUserData } from "../store/userStore";
 
 const IndexPage = () => {
   const [currPage, setCurrPage] = React.useState(1);
   const [questions, isLoading] = useQuestion();
+  const setUserData = useUserData((state) => state.setUserData);
+  const [user] = useUser();
+
+  React.useEffect(() => {
+    if (user) {
+      setUserData(user);
+    }
+  }, []);
 
   let indexOfLastQuestion = currPage * QUESTIONS_PER_PAGE;
   let indexOfFirstQuestion = indexOfLastQuestion - QUESTIONS_PER_PAGE;

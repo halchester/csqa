@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "../../components/layout/Layout";
 import {
   Box,
@@ -7,20 +7,25 @@ import {
   Input,
   Stack,
   Text,
-  Textarea,
-  useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 import { CustomEditor } from "../../components/common/CustomEditor";
 import { Formik } from "formik";
 import axios from "../../lib/api";
-import { useUser } from "../../hooks/users";
+import { useUserData } from "../../store/userStore";
+import { useRouter } from "next/dist/client/router";
 
 const NewQuestionPage = () => {
   const [loading, setLoading] = useState(false);
-  const [user] = useUser();
+  const userData = useUserData((state) => state.userData);
   const toast = useToast();
-  // console.log(user);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!userData) {
+      router.push("/login");
+    }
+  }, [userData]);
 
   return (
     <Layout>
@@ -35,19 +40,24 @@ const NewQuestionPage = () => {
       </Box>
       <Formik
         initialValues={formikInitialValues}
-        onSubmit={async ({ title, body }) => {
+        onSubmit={async ({ title, body }, { resetForm }) => {
           setLoading(true);
-          const payload = { title, body, author: user };
+          const payload = { title, body, author: userData };
           try {
             const response = await axios.post("/api/question", payload);
             setLoading(false);
             toast({
               status: "success",
               title: "Uploaded!",
-              description: "Your question has been successfully uploaded!",
+              description:
+                "Your question has been successfully uploaded! Please wait for us to redirect you to the home page!",
               isClosable: true,
               duration: 4000,
             });
+            resetForm();
+            setTimeout(() => {
+              router.push("/");
+            }, 2000);
           } catch (err) {
             console.log(err);
             setLoading(false);

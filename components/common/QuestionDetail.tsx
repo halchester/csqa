@@ -12,10 +12,14 @@ export const QuestionDetail = ({ question }: IProps) => {
     <>
       <Text fontSize='2xl'>{question.title}</Text>
       <Text color='gray.500' fontSize='sm' as='span'>
-        {moment(question.createdAt).fromNow()} |
-      </Text>
-      <Text color='gray.500' fontSize='sm' as='span'>
-        &nbsp;{question.author.fullName}
+        Uploaded by{" "}
+        <Text color='gray.500' fontWeight='semibold' fontSize='sm' as='span'>
+          {question.author.username}
+        </Text>
+        {" | "}
+        <Text color='gray.500' fontWeight='semibold' fontSize='sm' as='span'>
+          {moment(question.createdAt).fromNow()}
+        </Text>
       </Text>
       <Text my='6'>{question.body}</Text>
     </>

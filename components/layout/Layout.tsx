@@ -1,7 +1,7 @@
 import { Flex, Link, Text, Box } from "@chakra-ui/react";
 import React from "react";
 import { SmallText } from "../utils";
-import { useUser } from "../../hooks/users";
+import { useUserData } from "../../store/userStore";
 
 interface IProps {
   children: React.ReactNode;
@@ -59,7 +59,7 @@ const Header = () => {
 };
 
 const Config = () => {
-  const [user] = useUser();
+  const userData = useUserData((state) => state.userData);
   return (
     <Flex
       justifyContent='space-around'
@@ -67,8 +67,8 @@ const Config = () => {
       maxWidth='md'
       mx='auto'
     >
-      {user ? (
-        <SmallText link='/bio'>{user.username} / Logout</SmallText>
+      {userData ? (
+        <SmallText link='/bio'>{userData?.username} / Logout</SmallText>
       ) : (
         <SmallText link='/signup'>Log In/ Sign Up</SmallText>
       )}

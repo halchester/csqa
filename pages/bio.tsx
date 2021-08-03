@@ -14,19 +14,23 @@ import { useUser } from "../hooks/users";
 import { Question } from "../types/common";
 import axios from "../lib/api";
 import { useRouter } from "next/dist/client/router";
+import { useUserData } from "../store/userStore";
 
 const BioPage = ({}) => {
   const [user, isLoading] = useUser();
   const [loading, setLoading] = useState(false);
+  const removeUserData = useUserData((state) => state.removeUserData);
   const router = useRouter();
 
   const logoutUser = async () => {
     setLoading(true);
     try {
       const response = await axios.delete("/api/auth");
-      console.log(response);
-      setLoading(false);
-      router.push("/");
+      if (response) {
+        removeUserData();
+        setLoading(false);
+        router.push("/");
+      }
     } catch (err) {
       console.log(err);
       setLoading(false);
@@ -36,7 +40,9 @@ const BioPage = ({}) => {
   return (
     <Layout>
       {isLoading ? (
-        <Text>Please wait loading!</Text>
+        <Text align='center' color='green'>
+          Please wait loading!
+        </Text>
       ) : (
         <>
           <Text>{user.fullName}</Text>
@@ -47,7 +53,11 @@ const BioPage = ({}) => {
             &nbsp;{user.email}
           </Text>
           <Stack spacing='4' my='6'>
-            <Text fontSize='lg' fontWeight='semibold'>
+            <Text
+              fontSize='lg'
+              fontWeight='semibold'
+              textDecoration='underline'
+            >
               Questions you've uploaded
             </Text>
             {user.questions.map((question: Question) => (

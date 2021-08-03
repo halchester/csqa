@@ -6,20 +6,21 @@ import { useUser } from "../../hooks/users";
 import axios from "../../lib/api";
 import { useRouter } from "next/dist/client/router";
 import { AddComment } from "./AddComment";
+import { useUserData } from "../../store/userStore";
 
 type IProps = {
   comments: CommentT[];
 };
 
 export const CommentSection = ({ comments }: IProps) => {
-  const [user] = useUser();
+  const userData = useUserData((state) => state.userData);
   const router = useRouter();
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(false);
 
   const postComment = async () => {
     setLoading(true);
-    const payload = { comment, author: user };
+    const payload = { comment, author: userData };
     try {
       const response = await axios.post(
         `/api/question/${router.query.questionId}`,
@@ -37,7 +38,7 @@ export const CommentSection = ({ comments }: IProps) => {
   return (
     <Box my='6'>
       <Stack spacing='4'>
-        {user ? (
+        {userData ? (
           <AddComment
             comment={comment}
             setComment={setComment}
@@ -45,7 +46,7 @@ export const CommentSection = ({ comments }: IProps) => {
             loading={loading}
           />
         ) : (
-          <Text>
+          <Text align='center' color='red.500'>
             You have to <Link href='/login'>log in</Link> to comment.
           </Text>
         )}
