@@ -1,4 +1,4 @@
-import create, { UseStore } from "zustand";
+import create from "zustand";
 import { User } from "../types/common";
 import { persist } from "zustand/middleware";
 
@@ -12,11 +12,13 @@ export const useUserData = create<UserStore>(
   persist(
     (set) => ({
       userData: null,
+
       setUserData: (user: User) => {
         set(() => ({
           userData: user,
         }));
       },
+
       removeUserData: () => {
         set(() => ({
           userData: null,
