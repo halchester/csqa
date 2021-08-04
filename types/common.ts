@@ -29,3 +29,13 @@ export type Comment = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type Upvote = {
+  questionId: Question;
+  votes: User[];
+};
+
+export type Downvote = {
+  questionId: Question;
+  votes: User[];
+};
