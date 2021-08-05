@@ -11,11 +11,14 @@ import {
   Flex,
   IconButton,
   useToast,
+  FormControl,
+  FormHelperText,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import axios from "../lib/api";
 import { useRouter } from "next/dist/client/router";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { loginFormValidation } from "../lib/formValidation";
 
 const LoginPage = (): JSX.Element => {
   const [loading, setLoading] = React.useState(false);
@@ -37,6 +40,7 @@ const LoginPage = (): JSX.Element => {
       </Box>
       <Formik
         initialValues={formikInitialValues}
+        validationSchema={loginFormValidation}
         onSubmit={async ({ username, password }) => {
           setLoading(true);
           const payload = { username, password };
@@ -59,19 +63,32 @@ const LoginPage = (): JSX.Element => {
           }
         }}
       >
-        {({ values, handleChange, handleBlur, handleSubmit }) => (
+        {({
+          values,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          errors,
+          touched,
+        }) => (
           <form onSubmit={handleSubmit}>
             <Stack spacing='3'>
-              <Box>
+              <FormControl id='username'>
                 <FormLabel>Username</FormLabel>
                 <Input
                   value={values.username}
                   name='username'
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  isInvalid={
+                    Boolean(touched.username) && Boolean(errors.username)
+                  }
                 />
-              </Box>
-              <Box>
+                <FormHelperText color='red.500'>
+                  {touched.username && errors.username}
+                </FormHelperText>
+              </FormControl>
+              <FormControl id='password'>
                 <Flex justifyContent='space-between' alignItems='center'>
                   <FormLabel mt='1'>Password</FormLabel>
                   {showPassword ? (
@@ -98,8 +115,14 @@ const LoginPage = (): JSX.Element => {
                   name='password'
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  isInvalid={
+                    Boolean(touched.password) && Boolean(errors.password)
+                  }
                 />
-              </Box>
+                <FormHelperText color='red.500'>
+                  {touched.password && errors.password}
+                </FormHelperText>
+              </FormControl>
               <Button
                 onClick={() => handleSubmit()}
                 isFullWidth

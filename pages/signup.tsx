@@ -9,9 +9,12 @@ import {
   Link,
   useToast,
   Stack,
+  FormHelperText,
+  FormControl,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import axios from "../lib/api";
+import { signUpFormValidation } from "../lib/formValidation";
 
 const SignupPage = (): JSX.Element => {
   const [loading, setLoading] = React.useState(false);
@@ -29,6 +32,7 @@ const SignupPage = (): JSX.Element => {
       </Box>
       <Formik
         initialValues={formikInitialValues}
+        validationSchema={signUpFormValidation}
         onSubmit={async (
           { fullName, email, password, username },
           { resetForm }
@@ -57,54 +61,90 @@ const SignupPage = (): JSX.Element => {
           }
         }}
       >
-        {({ values, handleChange, handleBlur, handleSubmit }) => (
+        {({
+          values,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          errors,
+          touched,
+        }) => (
           <form onSubmit={handleSubmit}>
             <Stack spacing={2}>
-              <Box>
+              <FormControl id='username'>
                 <FormLabel>Username</FormLabel>
                 <Input
                   name='username'
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.username}
+                  isInvalid={
+                    Boolean(touched.username) && Boolean(errors.username)
+                  }
                 />
-              </Box>
-              <Box>
+                <FormHelperText color='red.500'>
+                  {touched.username && errors.username}
+                </FormHelperText>
+              </FormControl>
+
+              <FormControl id='email'>
                 <FormLabel>Email</FormLabel>
                 <Input
                   name='email'
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.email}
+                  isInvalid={Boolean(touched.email) && Boolean(errors.email)}
                 />
-              </Box>
-              <Box>
+                <FormHelperText color='red.500'>
+                  {touched.email && errors.email}
+                </FormHelperText>
+              </FormControl>
+              <FormControl id='fullName'>
                 <FormLabel>Full Name</FormLabel>
                 <Input
                   name='fullName'
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.fullName}
+                  isInvalid={
+                    Boolean(touched.fullName) && Boolean(errors.fullName)
+                  }
                 />
-              </Box>
-              <Box>
+                <FormHelperText color='red.500'>
+                  {touched.fullName && errors.fullName}
+                </FormHelperText>
+              </FormControl>
+              <FormControl id='password'>
                 <FormLabel>Password</FormLabel>
                 <Input
                   name='password'
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
+                  isInvalid={
+                    Boolean(touched.password) && Boolean(errors.password)
+                  }
                 />
-              </Box>
-              <Box>
+                <FormHelperText color='red.500'>
+                  {touched.password && errors.password}
+                </FormHelperText>
+              </FormControl>
+              <FormControl id='repassword'>
                 <FormLabel>Re-enter Password</FormLabel>
                 <Input
                   name='repassword'
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.repassword}
+                  isInvalid={
+                    Boolean(touched.repassword) && Boolean(errors.repassword)
+                  }
                 />
-              </Box>
+                <FormHelperText color='red.500'>
+                  {touched.repassword && errors.repassword}
+                </FormHelperText>
+              </FormControl>
               <Button
                 onClick={() => handleSubmit()}
                 isFullWidth
