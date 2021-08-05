@@ -8,14 +8,22 @@ import {
   Box,
   Link,
   Stack,
+  Flex,
+  IconButton,
+  useToast,
 } from "@chakra-ui/react";
 import { Formik } from "formik";
 import axios from "../lib/api";
 import { useRouter } from "next/dist/client/router";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const LoginPage = (): JSX.Element => {
   const [loading, setLoading] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
   const router = useRouter();
+  const toast = useToast();
+
+  const togglePassword = () => setShowPassword(!showPassword);
 
   return (
     <Layout>
@@ -40,18 +48,15 @@ const LoginPage = (): JSX.Element => {
             }
             setLoading(false);
           } catch (err) {
-            console.log(err);
+            toast({
+              status: "error",
+              title: "Error!",
+              description: "Your username or password is wrong!",
+              isClosable: false,
+              duration: 3000,
+            });
             setLoading(false);
           }
-
-          // .then((response) => {
-          //   console.log(response);
-          //   setLoading(false);
-          // })
-          // .catch((err) => {
-          //   console.log(err.response);
-          //   setLoading(false);
-          // });
         }}
       >
         {({ values, handleChange, handleBlur, handleSubmit }) => (
@@ -67,8 +72,28 @@ const LoginPage = (): JSX.Element => {
                 />
               </Box>
               <Box>
-                <FormLabel>Password</FormLabel>
+                <Flex justifyContent='space-between' alignItems='center'>
+                  <FormLabel mt='1'>Password</FormLabel>
+                  {showPassword ? (
+                    <IconButton
+                      size='sm'
+                      aria-label='togglePassword'
+                      onClick={togglePassword}
+                      colorScheme='green'
+                      icon={<ViewOffIcon />}
+                    />
+                  ) : (
+                    <IconButton
+                      size='sm'
+                      aria-label='togglePassword'
+                      onClick={togglePassword}
+                      colorScheme='red'
+                      icon={<ViewIcon />}
+                    />
+                  )}
+                </Flex>
                 <Input
+                  type={showPassword ? "text" : "password"}
                   value={values.password}
                   name='password'
                   onChange={handleChange}

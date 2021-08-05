@@ -3,6 +3,7 @@ import { connect, ConnectionOptions } from "mongoose";
 const options: ConnectionOptions = {
   useFindAndModify: true,
   useCreateIndex: true,
+  useUnifiedTopology: true,
 };
 
 export default async function database(
