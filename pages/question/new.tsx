@@ -42,7 +42,11 @@ const NewQuestionPage = (): JSX.Element => {
         initialValues={formikInitialValues}
         onSubmit={async ({ title, body }, { resetForm }) => {
           setLoading(true);
-          const payload = { title, body, author: userData };
+          const payload = {
+            title,
+            body,
+            author: userData,
+          };
           try {
             await axios.post("/api/question", payload);
             setLoading(false);

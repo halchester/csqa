@@ -12,10 +12,23 @@ const QuestionSchema = new Schema<QuestionDoc>(
       type: String,
       required: true,
     },
-    // voters: [],
     points: {
-      type: Number,
-      default: 0,
+      count: {
+        type: Number,
+        default: 0,
+      },
+      uppers: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "User",
+        },
+      ],
+      downers: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "User",
+        },
+      ],
     },
     comments: [
       {

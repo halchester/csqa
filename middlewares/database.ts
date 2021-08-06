@@ -4,6 +4,7 @@ const options: ConnectionOptions = {
   useFindAndModify: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
+  useNewUrlParser: true,
 };
 
 export default async function database(

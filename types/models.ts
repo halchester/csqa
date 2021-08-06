@@ -7,6 +7,7 @@ export type QuestionDoc = Document & {
   createdAt: Date;
   questionId: string;
   comments: CommentDoc[];
+  points: PointDoc;
 };
 
 export type UserDoc = Document & {
@@ -25,12 +26,8 @@ export type CommentDoc = Document & {
   commentId: string;
 };
 
-export type UpvoteDoc = Document & {
-  questionId: QuestionDoc;
-  votes: UserDoc[];
-};
-
-export type DownvoteDoc = Document & {
-  questionId: QuestionDoc;
-  votes: UserDoc[];
+export type PointDoc = Document & {
+  count: number;
+  uppers: UserDoc[];
+  downers: UserDoc[];
 };

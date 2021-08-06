@@ -5,7 +5,7 @@ export type Question = {
   author: User;
   updatedAt: Date;
   createdAt: Date;
-  points: number;
+  points: Point;
   comments: Comment[];
 };
 
@@ -30,12 +30,8 @@ export type Comment = {
   updatedAt: Date;
 };
 
-export type Upvote = {
-  questionId: Question;
-  votes: User[];
-};
-
-export type Downvote = {
-  questionId: Question;
-  votes: User[];
+export type Point = {
+  count: number;
+  uppers: User[];
+  downers: User[];
 };
