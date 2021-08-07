@@ -6,13 +6,15 @@ const getQuestions = async () => {
   return res.data.data;
 };
 
-export const useQuestion = () => {
-  const { data, refetch, isLoading } = useQuery("questions", getQuestions);
+export const useQuestion = (): any => {
+  const { data, refetch, isLoading } = useQuery("questions", getQuestions, {
+    staleTime: 5000,
+  });
   const questions = data;
   return [questions, isLoading, { refetch }];
 };
 
-export const getQuestionDetail = async ({ queryKey }: any) => {
+export const getQuestionDetail = async ({ queryKey }: any): Promise<any> => {
   const res = await axios.get(`/api/question/${queryKey[1]}`);
   return res.data.data;
 };

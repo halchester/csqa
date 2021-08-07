@@ -32,6 +32,6 @@ export type Comment = {
 
 export type Point = {
   count: number;
-  uppers: User[];
-  downers: User[];
+  uppers: string[];
+  downers: string[];
 };

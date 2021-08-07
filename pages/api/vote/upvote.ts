@@ -16,7 +16,20 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
       });
 
       if (foundQuestion.points.uppers.includes(user._id)) {
-        return res.send("cannot up 2 times");
+        return res.status(400).json({ message: "Cannot upvote twice!" });
+      }
+
+      if (foundQuestion.points.downers.includes(user._id)) {
+        await Question.updateOne(
+          {
+            _id: question._id,
+          },
+          {
+            $pull: {
+              "points.downers": user._id,
+            },
+          }
+        );
       }
 
       let updatedQuestion = await Question.updateOne(
@@ -31,10 +44,10 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
       );
       console.log(updatedQuestion);
     }
-    return res.send("done upping");
+    return res.status(200).json({ message: "ok" });
   } catch (err) {
     console.log(err);
-    return res.send("not ok");
+    return res.status(400).json({ message: "Something went wrong!" });
   }
 });
 
