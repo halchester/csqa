@@ -27,7 +27,7 @@ const CustomQuestionDetailPage = (): JSX.Element => {
       ) : data !== null ? (
         <>
           <QuestionDetail question={data} />
-          <CommentSection comments={data.comments} refetch = {refetch}/>
+          <CommentSection comments={data.comments} refetch={refetch} />
         </>
       ) : null}
     </Layout>
