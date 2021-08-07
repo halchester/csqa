@@ -44,7 +44,7 @@ const SignupPage = (): JSX.Element => {
             toast({
               status: "success",
               title: "Account registered!",
-              description: `Your account with ${response.data.username} has been successfully registered!`,
+              description: `Your account with ${response.data.data.username} has been successfully registered!`,
               isClosable: true,
               duration: 9000,
             });

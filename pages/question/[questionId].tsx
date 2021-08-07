@@ -9,7 +9,7 @@ import { CommentSection } from "../../components/common/CommentSection";
 
 const CustomQuestionDetailPage = (): JSX.Element => {
   const router = useRouter();
-  const { data, isLoading, error } = useQuery(
+  const { data, isLoading, error, refetch } = useQuery(
     ["detail", router.query.questionId],
     getQuestionDetail
   );
@@ -27,7 +27,7 @@ const CustomQuestionDetailPage = (): JSX.Element => {
       ) : data !== null ? (
         <>
           <QuestionDetail question={data} />
-          <CommentSection comments={data.comments} />
+          <CommentSection comments={data.comments} refetch = {refetch}/>
         </>
       ) : null}
     </Layout>

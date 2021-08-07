@@ -5,7 +5,7 @@ import { QUESTIONS_PER_PAGE } from "../constants/common";
 import { Pagination } from "../components/common/Pagination";
 import { useQuestion } from "../hooks/question";
 import { Question as QuestionT } from "../types/common";
-import { Center, CircularProgress } from "@chakra-ui/react";
+import { Center, CircularProgress, Text, Link } from "@chakra-ui/react";
 import { useUser } from "../hooks/users";
 import { useUserData } from "../store/userStore";
 
@@ -36,7 +36,7 @@ const IndexPage = (): JSX.Element => {
         <Center>
           <CircularProgress isIndeterminate />
         </Center>
-      ) : questions ? (
+      ) : questions.length > 0 ? (
         <>
           {currQuestions.map((question: QuestionT, idx: number) => (
             <Question question={question} key={idx} />
@@ -45,7 +45,14 @@ const IndexPage = (): JSX.Element => {
             <Pagination totalQuestions={questions.length} paginate={paginate} />
           ) : null}
         </>
-      ) : null}
+      ) : (
+        <>
+          <Text align='center'>There are no questions at the moment</Text>
+          <Text align='center' textDecoration='underline'>
+            <Link href='/question/new'>Create one now!</Link>
+          </Text>
+        </>
+      )}
     </Layout>
   );
 };

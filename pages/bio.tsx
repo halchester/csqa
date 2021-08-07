@@ -22,6 +22,7 @@ const BioPage = (): JSX.Element => {
   const router = useRouter();
   const userData = useUserData((state) => state.userData);
   // const toast = useToast();
+  const calculatePoint = (up: number, down: number) => up - down;
 
   const logoutUser = async () => {
     setLoading(true);
@@ -64,7 +65,10 @@ const BioPage = (): JSX.Element => {
               <Box>
                 <Text as='span'>Points :</Text>
                 <Badge ml='3' colorScheme='orange'>
-                  {question.points}
+                  {calculatePoint(
+                    question.points.uppers.length,
+                    question.points.downers.length
+                  )}
                 </Badge>
               </Box>
             </Flex>
