@@ -1,10 +1,21 @@
-### CSQA
+### CSQA 
 
-A social media Q&A platform for developers and engineers! Currently, it's not hosted anywhere and just a proof of concept.
+A social media Q&A platform for developers and engineers! 🚀
 
-### References and Rationale
+#### Features
+- [x] Post questions
+- [x] Comments!
+- [x] Upvote/ downvote questions
+- [ ] Follow users
+- [ ] Comment threads
 
-This project is inspired by stackoverflow and I want to practice my database design system. Since I always learn project-based, this is one of the projects to help me imporve myself. I think I've leart what I have to know.
+#### Tech stack
+- Next JS
+- MongoDB
+- Express
+- Typescript
+- Chakra UI
+- React Query
 
 #### Samples
 
