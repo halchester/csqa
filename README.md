@@ -1,8 +1,9 @@
-### CSQA 
+### CSQA
 
 A social media Q&A platform for developers and engineers! 🚀
 
 #### Features
+
 - [x] Post questions
 - [x] Comments!
 - [x] Upvote/ downvote questions
@@ -10,6 +11,7 @@ A social media Q&A platform for developers and engineers! 🚀
 - [ ] Comment threads
 
 #### Tech stack
+
 - Next JS
 - MongoDB
 - Express
