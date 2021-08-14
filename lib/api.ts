@@ -1,8 +1,9 @@
 import axios from "axios";
 
-// const endPoint = "http://localhost:3000";
-const endPoint = "https://csqa.vercel.app";
+const dev = process.env.NODE_ENV !== "production";
+
+export const server = dev ? "http://localhost:3000" : "https://csqa.vercel.app";
 
 export default axios.create({
-  baseURL: endPoint,
+  baseURL: server,
 });
