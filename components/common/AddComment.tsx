@@ -16,21 +16,24 @@ export const AddComment = ({
   postComment,
 }: IProps): JSX.Element => {
   return (
-    <Flex>
-      <Input
-        size='sm'
-        placeholder='What are your thoughts?'
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-      />
-      <IconButton
-        ml='2'
-        aria-label='add-comment'
-        onClick={postComment}
-        icon={<TriangleUpIcon />}
-        size='sm'
-        isLoading={loading}
-      />
-    </Flex>
+    <form onSubmit={postComment}>
+      <Flex>
+        <Input
+          size='sm'
+          placeholder='What are your thoughts?'
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
+        <IconButton
+          ml='2'
+          aria-label='add-comment'
+          type='submit'
+          onClick={postComment}
+          icon={<TriangleUpIcon />}
+          size='sm'
+          isLoading={loading}
+        />
+      </Flex>
+    </form>
   );
 };
