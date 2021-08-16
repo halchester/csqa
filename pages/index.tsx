@@ -1,24 +1,20 @@
 import * as React from "react";
+
 import {Question} from "../components/common/Question";
 import {Layout} from "../components/layout/Layout";
 import {QUESTIONS_PER_PAGE} from "../constants/common";
 import {Pagination} from "../components/common/Pagination";
+import {useQuestion} from "../hooks/question";
 import {Question as QuestionT} from "../types/common";
-import {Text, Link} from "@chakra-ui/react";
-// import {useUser} from "../hooks/users";
-// import {useUserData} from "../store/userStore";
-import {GetServerSideProps} from "next";
-import axios from "../lib/api";
+import {Center, CircularProgress, Text, Link} from "@chakra-ui/react";
+import {useUser} from "../hooks/users";
+import {useUserData} from "../store/userStore";
 
-interface IProps {
-  questions: QuestionT[];
-}
-
-const IndexPage = ({questions}: IProps): JSX.Element => {
+const IndexPage = (): JSX.Element => {
   const [currPage, setCurrPage] = React.useState(1);
-  // const setUserData = useUserData((state) => state.setUserData);
-  // const userData = useUserData((state) => state.userData);
-  // const [user] = useUser();
+  const [questions, isLoading] = useQuestion();
+  const setUserData = useUserData((state) => state.setUserData);
+  const [user] = useUser();
 
   // React.useEffect(() => {
   //   if (user) {
@@ -37,7 +33,11 @@ const IndexPage = ({questions}: IProps): JSX.Element => {
 
   return (
     <Layout>
-      {questions && (
+      {isLoading ? (
+        <Center>
+          <CircularProgress isIndeterminate />
+        </Center>
+      ) : questions.length > 0 ? (
         <>
           {currQuestions.map((question: QuestionT, idx: number) => (
             <Question question={question} key={idx} />
@@ -46,36 +46,16 @@ const IndexPage = ({questions}: IProps): JSX.Element => {
             <Pagination totalQuestions={questions.length} paginate={paginate} />
           ) : null}
         </>
-      )}
-      {questions.length === 0 ? (
+      ) : (
         <>
           <Text align='center'>There are no questions at the moment</Text>
           <Text align='center' textDecoration='underline'>
             <Link href='/question/new'>Create one now!</Link>
           </Text>
         </>
-      ) : null}
+      )}
     </Layout>
   );
 };
 
 export default IndexPage;
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const data = await axios.get(`/api/question`);
-
-  if (!data) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false
-      }
-    };
-  }
-
-  return {
-    props: {
-      questions: data.data.data
-    }
-  };
-};
