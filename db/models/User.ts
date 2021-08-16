@@ -1,37 +1,37 @@
 import mongoose, {model, Schema} from "mongoose";
 import shortid from "shortid";
-import {UserDoc} from "../types/models";
+import {UserDoc} from "../../types/models";
 
 const UserSchema = new Schema<UserDoc>(
   {
     email: {
       type: String,
-      required: true,
+      required: true
     },
     fullName: {
       type: String,
-      required: true,
+      required: true
     },
     username: {
       type: String,
-      required: true,
+      required: true
     },
     password: {
       type: String,
-      required: true,
+      required: true
     },
     questions: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Question",
-      },
+        ref: "Question"
+      }
     ],
     userId: {
-      type: String,
-    },
+      type: String
+    }
   },
   {
-    timestamps: true,
+    timestamps: true
   }
 );
 

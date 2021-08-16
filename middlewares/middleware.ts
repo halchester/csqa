@@ -1,10 +1,10 @@
+import nc from "next-connect";
 import database from "./database";
-import nextConnect from "next-connect";
 import {NextApiRequest, NextApiResponse} from "next";
 import sessionMiddleware from "./session";
 import passport from "./passport";
 
-const middleware = nextConnect<NextApiRequest, NextApiResponse>();
+const middleware = nc<NextApiRequest, NextApiResponse>();
 
 middleware
   .use(database)

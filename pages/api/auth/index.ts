@@ -1,9 +1,9 @@
-import type {NextApiRequest, NextApiResponse} from "next";
-import nextConnect from "next-connect";
+import type { NextApiRequest, NextApiResponse } from "next";
+import nc from "next-connect";
 import middleware from "../../../middlewares/middleware";
 import passport from "../../../middlewares/passport";
 
-const handler = nextConnect();
+const handler = nc();
 handler.use(middleware);
 
 type ExtendedRequest = {
@@ -15,7 +15,7 @@ type ExtendedRequest = {
 handler.post(
   passport.authenticate("local"),
   (req: ExtendedRequest, res: NextApiResponse) => {
-    return res.json({success: true, data: req.user});
+    return res.json({ success: true, data: req.user });
   }
 );
 

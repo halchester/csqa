@@ -1,6 +1,6 @@
 import mongoose, {model, Schema} from "mongoose";
 import shortid from "shortid";
-import {CommentDoc} from "../types/models";
+import {CommentDoc} from "../../types/models";
 
 const CommentSchema = new Schema<CommentDoc>(
   {

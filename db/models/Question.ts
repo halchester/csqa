@@ -1,6 +1,6 @@
 import mongoose, {model, Schema} from "mongoose";
 import shortid from "shortid";
-import {QuestionDoc} from "../types/models";
+import {QuestionDoc} from "../../types/models";
 
 const QuestionSchema = new Schema<QuestionDoc>(
   {
@@ -58,6 +58,6 @@ QuestionSchema.pre<QuestionDoc>("save", function (next) {
 });
 
 const Question =
-  mongoose.models.Question || model<QuestionDoc>("Question", QuestionSchema);
+  model<QuestionDoc>("Question", QuestionSchema) || mongoose.models.Question;
 
 export default Question;

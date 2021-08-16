@@ -1,11 +1,19 @@
 import * as React from "react";
-import {ChakraProvider} from "@chakra-ui/react";
-import {QueryClient, QueryClientProvider} from "react-query";
-import {AppProps} from "next/app";
+import { ChakraProvider } from "@chakra-ui/react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { AppProps } from "next/app";
 
 const queryClient = new QueryClient();
 
-function MyApp({Component, pageProps}: AppProps): JSX.Element {
+// const SafeHydrate = ({ children }: any) => {
+//   return (
+//     <div suppressHydrationWarning>
+//       {typeof window === "undefined" ? null : children}
+//     </div>
+//   );
+// };
+
+function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ChakraProvider>
       <QueryClientProvider client={queryClient}>

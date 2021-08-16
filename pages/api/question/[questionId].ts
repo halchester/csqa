@@ -1,16 +1,16 @@
-import {NextApiRequest, NextApiResponse} from "next";
-import nextConnect from "next-connect";
-import Comment from "../../../db/Comment";
-import Question from "../../../db/Question";
+import nc from "next-connect";
 import middleware from "../../../middlewares/middleware";
+import {NextApiRequest} from "next";
+import {NextApiResponse} from "next";
+import Question from "../../../db/models/Question";
+import Comment from "../../../db/models/Comment";
 
-const handler = nextConnect();
+const handler = nc();
 handler.use(middleware);
 
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const {questionId} = req.query;
-
     const data = await Question.findOne({questionId: questionId as string})
       .populate("author")
       .populate({

@@ -1,13 +1,13 @@
-import {NextApiRequest, NextApiResponse} from "next";
-import nextConnect from "next-connect";
+import nc from "next-connect";
 import middleware from "../../../middlewares/middleware";
-import Question from "../../../db/Question";
-import User from "../../../db/User";
+import {NextApiRequest, NextApiResponse} from "next";
+import Question from "../../../db/models/Question";
+import User from "../../../db/models/User";
 
-const handler = nextConnect();
+const handler = nc();
 handler.use(middleware);
 
-handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
+handler.get(async (_req: NextApiRequest, res: NextApiResponse) => {
   try {
     const data = await Question.find().populate("author");
     return res.status(200).json({success: true, data});
@@ -42,8 +42,8 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
           {userId: req.body.author.userId},
           {
             $push: {
-              questions: response,
-            },
+              questions: response
+            }
           }
         );
       });
@@ -52,5 +52,4 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     console.log(err);
   }
 });
-
 export default handler;
