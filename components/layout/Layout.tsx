@@ -9,7 +9,7 @@ interface IProps {
 
 export const Layout = ({ children }: IProps): JSX.Element => {
   return (
-    <div>
+    <>
       <Header />
       <Box
         justifyContent='space-between'
@@ -21,7 +21,7 @@ export const Layout = ({ children }: IProps): JSX.Element => {
         {children}
       </Box>
       <Config />
-    </div>
+    </>
   );
 };
 
@@ -34,26 +34,22 @@ const Header = () => {
       maxWidth='md'
       mx='auto'
     >
-      <div>
+      <Box>
         <Text as='span' fontSize='lg'>
           <Link href='/'>csqa</Link>
         </Text>
-      </div>
-      <div>
-        <Link href='/search'>
-          <Text as='span' fontSize='md' color='gray.500'>
-            Search
-          </Text>
-        </Link>
+      </Box>
+      <Box>
+        <Text as='span' fontSize='md' color='gray.500'>
+          <Link href='/search'>Search</Link>
+        </Text>
         <Text as='span' fontSize='md' color='gray.500'>
           &nbsp; | &nbsp;
         </Text>
-        <Link href='/question/new'>
-          <Text as='span' fontSize='md' color='gray.500'>
-            New Question
-          </Text>
-        </Link>
-      </div>
+        <Text as='span' fontSize='md' color='gray.500'>
+          <Link href='/question/new'>New Question</Link>
+        </Text>
+      </Box>
     </Flex>
   );
 };

@@ -5,21 +5,11 @@ import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient();
 
-const SafeHydrate = ({ children }: any) => {
-  return (
-    <div suppressHydrationWarning>
-      {typeof window === "undefined" ? null : children}
-    </div>
-  );
-};
-
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ChakraProvider>
       <QueryClientProvider client={queryClient}>
-        <SafeHydrate>
-          <Component {...pageProps} />
-        </SafeHydrate>
+        <Component {...pageProps} />
       </QueryClientProvider>
     </ChakraProvider>
   );
