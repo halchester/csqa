@@ -1,9 +1,9 @@
 import User from "../../db/models/User";
-import { User as UserT } from "../../types/common";
+import {User as UserT} from "../../types/common";
 
 export const findUserById = async (userId: string): Promise<UserT> => {
   try {
-    return await User.findOne({ _id: userId });
+    return await User.findOne({_id: userId});
   } catch (err) {
     return err;
   }
@@ -11,7 +11,7 @@ export const findUserById = async (userId: string): Promise<UserT> => {
 
 export const findUserByUsername = async (username: string): Promise<UserT> => {
   try {
-    return await User.findOne({ username });
+    return await User.findOne({username});
   } catch (err) {
     return err;
   }
@@ -19,7 +19,7 @@ export const findUserByUsername = async (username: string): Promise<UserT> => {
 
 export const findUserByEmail = async (email: string): Promise<UserT> => {
   try {
-    return await User.findOne({ email });
+    return await User.findOne({email});
   } catch (err) {
     return err;
   }

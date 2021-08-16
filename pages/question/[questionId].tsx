@@ -1,18 +1,18 @@
 import * as React from "react";
-import { Layout } from "../../components/layout/Layout";
-import { Center, CircularProgress } from "@chakra-ui/react";
-import { QuestionDetail } from "../../components/common/QuestionDetail";
-import { CommentSection } from "../../components/common/CommentSection";
+import {Layout} from "../../components/layout/Layout";
+import {Center, CircularProgress} from "@chakra-ui/react";
+import {QuestionDetail} from "../../components/common/QuestionDetail";
+import {CommentSection} from "../../components/common/CommentSection";
 // import { GetStaticPaths, GetStaticProps } from "next";
 // import axios from "../../lib/api";
 // import { Question as QuestionT } from "../../types/common";
-import { useQuery } from "react-query";
-import { getQuestionDetail } from "../../hooks/question";
-import { useRouter } from "next/dist/client/router";
+import {useQuery} from "react-query";
+import {getQuestionDetail} from "../../hooks/question";
+import {useRouter} from "next/dist/client/router";
 
 const CustomQuestionDetailPage = (): JSX.Element => {
   const router = useRouter();
-  const { data, refetch, isLoading } = useQuery(
+  const {data, refetch, isLoading} = useQuery(
     ["details", router.query.questionId],
     getQuestionDetail
   );

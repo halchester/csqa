@@ -1,4 +1,4 @@
-import { Textarea } from "@chakra-ui/react";
+import {Textarea} from "@chakra-ui/react";
 import * as React from "react";
 
 type IProps = {
@@ -12,7 +12,7 @@ type IProps = {
 export const CustomEditor = ({
   name,
   handleChange,
-  value,
+  value
 }: IProps): JSX.Element => {
   return (
     <>

@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import {useQuery} from "react-query";
 import axios from "../lib/api";
 
 const getQuestions = async () => {
@@ -7,11 +7,11 @@ const getQuestions = async () => {
 };
 
 export const useQuestion = (): any => {
-  const { data, refetch, isLoading } = useQuery("questions", getQuestions, {
-    staleTime: 5000,
+  const {data, refetch, isLoading} = useQuery("questions", getQuestions, {
+    staleTime: 5000
   });
   const questions = data;
-  return [questions, isLoading, { refetch }];
+  return [questions, isLoading, {refetch}];
 };
 
 export const getQuestionDetail = async (props: any): Promise<any> => {

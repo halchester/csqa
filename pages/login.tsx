@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Layout } from "../components/layout/Layout";
+import {Layout} from "../components/layout/Layout";
 import {
   Button,
   FormLabel,
@@ -12,13 +12,13 @@ import {
   IconButton,
   useToast,
   FormControl,
-  FormHelperText,
+  FormHelperText
 } from "@chakra-ui/react";
-import { Formik } from "formik";
+import {Formik} from "formik";
 import axios from "../lib/api";
-import { useRouter } from "next/dist/client/router";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { loginFormValidation } from "../lib/formValidation";
+import {useRouter} from "next/dist/client/router";
+import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
+import {loginFormValidation} from "../lib/formValidation";
 
 const LoginPage = (): JSX.Element => {
   const [loading, setLoading] = React.useState(false);
@@ -41,9 +41,9 @@ const LoginPage = (): JSX.Element => {
       <Formik
         initialValues={formikInitialValues}
         validationSchema={loginFormValidation}
-        onSubmit={async ({ username, password }) => {
+        onSubmit={async ({username, password}) => {
           setLoading(true);
-          const payload = { username, password };
+          const payload = {username, password};
 
           try {
             const response = await axios.post("/api/auth", payload);
@@ -57,7 +57,7 @@ const LoginPage = (): JSX.Element => {
               title: "Error!",
               description: "Your username or password is wrong!",
               isClosable: false,
-              duration: 3000,
+              duration: 3000
             });
             setLoading(false);
           }
@@ -69,7 +69,7 @@ const LoginPage = (): JSX.Element => {
           handleBlur,
           handleSubmit,
           errors,
-          touched,
+          touched
         }) => (
           <form onSubmit={handleSubmit}>
             <Stack spacing='3'>
@@ -146,5 +146,5 @@ export default LoginPage;
 
 const formikInitialValues = {
   username: "",
-  password: "",
+  password: ""
 };

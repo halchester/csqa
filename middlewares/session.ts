@@ -9,12 +9,12 @@ export default function sessionMiddleware(
 ) {
   const store = new MongoStore({
     mongoUrl: process.env.DATABASE_URL,
-    stringify: false,
+    stringify: false
   });
   return session({
     secret: process.env.SESSION_SECRET as string,
     resave: false,
     saveUninitialized: false,
-    store,
+    store
   })(req as any, res as any, next);
 }

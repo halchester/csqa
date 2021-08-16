@@ -6,15 +6,15 @@ import {
   Flex,
   Link,
   Stack,
-  Text,
+  Text
   // useToast,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { Layout } from "../components/layout/Layout";
-import { Question } from "../types/common";
+import React, {useState} from "react";
+import {Layout} from "../components/layout/Layout";
+import {Question} from "../types/common";
 import axios from "../lib/api";
-import { useRouter } from "next/dist/client/router";
-import { useUserData } from "../store/userStore";
+import {useRouter} from "next/dist/client/router";
+import {useUserData} from "../store/userStore";
 
 const BioPage = (): JSX.Element => {
   const [loading, setLoading] = useState(false);

@@ -27,10 +27,10 @@ export const signUpFormValidation = Yup.object().shape({
     .required("Must add password"),
   repassword: Yup.string()
     .oneOf([Yup.ref("password")], "Passwords must match!")
-    .required("Passwords must match!"),
+    .required("Passwords must match!")
 });
 
 export const loginFormValidation = Yup.object().shape({
   username: Yup.string().required("Username must be provided!"),
-  password: Yup.string().required("Password must be provided!"),
+  password: Yup.string().required("Password must be provided!")
 });

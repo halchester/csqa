@@ -1,17 +1,17 @@
-import { Box, Flex, IconButton, Link, Text, useToast } from "@chakra-ui/react";
+import {Box, Flex, IconButton, Link, Text, useToast} from "@chakra-ui/react";
 import * as React from "react";
 import moment from "moment";
-import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
-import { Question as QuestionT } from "../../types/common";
-import { useUserData } from "../../store/userStore";
-import { useRouter } from "next/dist/client/router";
+import {ArrowDownIcon, ArrowUpIcon} from "@chakra-ui/icons";
+import {Question as QuestionT} from "../../types/common";
+import {useUserData} from "../../store/userStore";
+import {useRouter} from "next/dist/client/router";
 import axios from "../../lib/api";
 
 interface IProps {
   question: QuestionT;
 }
 
-export const Question = ({ question }: IProps): JSX.Element => {
+export const Question = ({question}: IProps): JSX.Element => {
   const userData = useUserData((state) => state.userData);
   const [loading, setLoading] = React.useState(false);
   const router = useRouter();
@@ -23,19 +23,19 @@ export const Question = ({ question }: IProps): JSX.Element => {
       return;
     } else {
       setLoading(true);
-      const payload = { user: userData, question, up: true };
+      const payload = {user: userData, question, up: true};
 
       try {
         await axios.post("/api/vote/upvote", payload);
         setLoading(false);
       } catch ({
         response: {
-          data: { message },
-        },
+          data: {message}
+        }
       }) {
         toast({
           status: "error",
-          description: message,
+          description: message
         });
         setLoading(false);
       }
@@ -48,18 +48,18 @@ export const Question = ({ question }: IProps): JSX.Element => {
       return;
     } else {
       setLoading(true);
-      const payload = { user: userData, question, down: true };
+      const payload = {user: userData, question, down: true};
       try {
         await axios.post("/api/vote/downvote", payload);
         setLoading(false);
       } catch ({
         response: {
-          data: { message },
-        },
+          data: {message}
+        }
       }) {
         toast({
           status: "error",
-          description: message,
+          description: message
         });
         setLoading(false);
       }

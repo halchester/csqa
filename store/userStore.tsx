@@ -1,6 +1,6 @@
 import create from "zustand";
-import { User } from "../types/common";
-import { persist } from "zustand/middleware";
+import {User} from "../types/common";
+import {persist} from "zustand/middleware";
 
 type UserStore = {
   userData: User | null;
@@ -15,18 +15,18 @@ export const useUserData = create<UserStore>(
 
       setUserData: (user: User) => {
         set(() => ({
-          userData: user,
+          userData: user
         }));
       },
 
       removeUserData: () => {
         set(() => ({
-          userData: null,
+          userData: null
         }));
-      },
+      }
     }),
     {
-      name: "userStore",
+      name: "userStore"
     }
   )
 );

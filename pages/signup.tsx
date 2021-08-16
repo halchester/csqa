@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Layout } from "../components/layout/Layout";
+import {Layout} from "../components/layout/Layout";
 import {
   Button,
   FormLabel,
@@ -10,11 +10,11 @@ import {
   useToast,
   Stack,
   FormHelperText,
-  FormControl,
+  FormControl
 } from "@chakra-ui/react";
-import { Formik } from "formik";
+import {Formik} from "formik";
 import axios from "../lib/api";
-import { signUpFormValidation } from "../lib/formValidation";
+import {signUpFormValidation} from "../lib/formValidation";
 
 const SignupPage = (): JSX.Element => {
   const [loading, setLoading] = React.useState(false);
@@ -34,11 +34,11 @@ const SignupPage = (): JSX.Element => {
         initialValues={formikInitialValues}
         validationSchema={signUpFormValidation}
         onSubmit={async (
-          { fullName, email, password, username },
-          { resetForm }
+          {fullName, email, password, username},
+          {resetForm}
         ) => {
           setLoading(true);
-          const payload = { fullName, email, password, username };
+          const payload = {fullName, email, password, username};
           try {
             const response = await axios.post("/api/auth/signup", payload);
             toast({
@@ -46,7 +46,7 @@ const SignupPage = (): JSX.Element => {
               title: "Account registered!",
               description: `Your account with ${response.data.data.username} has been successfully registered!`,
               isClosable: true,
-              duration: 9000,
+              duration: 9000
             });
             setLoading(false);
             resetForm();
@@ -55,7 +55,7 @@ const SignupPage = (): JSX.Element => {
               status: "error",
               description: `${err.response.data.error}`,
               isClosable: true,
-              duration: 9000,
+              duration: 9000
             });
             setLoading(false);
           }
@@ -67,7 +67,7 @@ const SignupPage = (): JSX.Element => {
           handleBlur,
           handleSubmit,
           errors,
-          touched,
+          touched
         }) => (
           <form onSubmit={handleSubmit}>
             <Stack spacing={2}>
@@ -171,5 +171,5 @@ const formikInitialValues = {
   fullName: "",
   email: "",
   password: "",
-  repassword: "",
+  repassword: ""
 };

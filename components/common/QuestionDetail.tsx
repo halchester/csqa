@@ -1,13 +1,13 @@
 import React from "react";
-import { Text } from "@chakra-ui/react";
-import { Question } from "../../types/common";
+import {Text} from "@chakra-ui/react";
+import {Question} from "../../types/common";
 import moment from "moment";
 
 type IProps = {
   question: Question;
 };
 
-export const QuestionDetail = ({ question }: IProps): JSX.Element => {
+export const QuestionDetail = ({question}: IProps): JSX.Element => {
   return (
     <>
       <Text fontSize='2xl'>{question.title}</Text>

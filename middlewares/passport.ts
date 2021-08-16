@@ -1,7 +1,7 @@
 import passport from "passport";
 import bcrypt from "bcrypt";
-import { Strategy } from "passport-local";
-import { findUserById, findUserByUsername } from "../lib/helpers/users";
+import {Strategy} from "passport-local";
+import {findUserById, findUserByUsername} from "../lib/helpers/users";
 
 const authenticateUser = async (
   _req: any,
@@ -14,7 +14,7 @@ const authenticateUser = async (
   if (!user) {
     console.log("not found");
     return done(null, false, {
-      message: `User with ${username} does not exist!`,
+      message: `User with ${username} does not exist!`
     });
   }
   try {
@@ -23,7 +23,7 @@ const authenticateUser = async (
       done(null, user);
     } else {
       return done(null, false, {
-        message: "Username or Password is incorrect!",
+        message: "Username or Password is incorrect!"
       });
     }
   } catch (err) {
@@ -37,7 +37,7 @@ passport.use(
   new Strategy(
     {
       usernameField: "username",
-      passReqToCallback: true,
+      passReqToCallback: true
     },
     authenticateUser
   )

@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Text, Link } from "@chakra-ui/react";
+import {Text, Link} from "@chakra-ui/react";
 
 export const SmallText = ({
   children,
-  link,
+  link
 }: {
   children: React.ReactNode;
   link?: string;

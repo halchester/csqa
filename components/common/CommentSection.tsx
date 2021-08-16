@@ -1,18 +1,18 @@
-import { Box, Text, Stack, Link, useToast } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { Comment as CommentT } from "../../types/common";
-import { Comment } from "./Comment";
+import {Box, Text, Stack, Link, useToast} from "@chakra-ui/react";
+import React, {useState} from "react";
+import {Comment as CommentT} from "../../types/common";
+import {Comment} from "./Comment";
 import axios from "../../lib/api";
-import { useRouter } from "next/dist/client/router";
-import { AddComment } from "./AddComment";
-import { useUserData } from "../../store/userStore";
+import {useRouter} from "next/dist/client/router";
+import {AddComment} from "./AddComment";
+import {useUserData} from "../../store/userStore";
 
 type IProps = {
   comments: CommentT[];
   refetch: () => void;
 };
 
-export const CommentSection = ({ comments, refetch }: IProps): JSX.Element => {
+export const CommentSection = ({comments, refetch}: IProps): JSX.Element => {
   const userData = useUserData((state) => state.userData);
   const router = useRouter();
   const [comment, setComment] = useState("");
@@ -21,7 +21,7 @@ export const CommentSection = ({ comments, refetch }: IProps): JSX.Element => {
 
   const postComment = async () => {
     setLoading(true);
-    const payload = { comment, author: userData };
+    const payload = {comment, author: userData};
     try {
       await axios.post(`/api/question/${router.query.questionId}`, payload);
       refetch();
@@ -30,7 +30,7 @@ export const CommentSection = ({ comments, refetch }: IProps): JSX.Element => {
     } catch (err) {
       toast({
         status: "error",
-        description: "Something went wrong!",
+        description: "Something went wrong!"
       });
       setLoading(false);
     }

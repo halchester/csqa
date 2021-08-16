@@ -1,6 +1,6 @@
-import { useQuery } from "react-query";
+import {useQuery} from "react-query";
 import axios from "../lib/api";
-import { useUserData } from "../store/userStore";
+import {useUserData} from "../store/userStore";
 
 const getCurrentUser = async () => {
   const res = await axios.get("/api/auth/currentUser");
@@ -9,11 +9,11 @@ const getCurrentUser = async () => {
 };
 
 export const useUser = (): any => {
-  const { data, refetch, isLoading } = useQuery("user", getCurrentUser);
+  const {data, refetch, isLoading} = useQuery("user", getCurrentUser);
   const setUserData = useUserData((state) => state.setUserData);
   if (!isLoading && data) {
     setUserData(data);
   }
   const user = data;
-  return [user, isLoading, { refetch }];
+  return [user, isLoading, {refetch}];
 };

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Layout } from "../../components/layout/Layout";
+import React, {useEffect, useState} from "react";
+import {Layout} from "../../components/layout/Layout";
 import {
   Box,
   Button,
@@ -7,13 +7,13 @@ import {
   Input,
   Stack,
   Text,
-  useToast,
+  useToast
 } from "@chakra-ui/react";
-import { CustomEditor } from "../../components/common/CustomEditor";
-import { Formik } from "formik";
+import {CustomEditor} from "../../components/common/CustomEditor";
+import {Formik} from "formik";
 import axios from "../../lib/api";
-import { useUserData } from "../../store/userStore";
-import { useRouter } from "next/dist/client/router";
+import {useUserData} from "../../store/userStore";
+import {useRouter} from "next/dist/client/router";
 
 const NewQuestionPage = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
@@ -40,12 +40,12 @@ const NewQuestionPage = (): JSX.Element => {
       </Box>
       <Formik
         initialValues={formikInitialValues}
-        onSubmit={async ({ title, body }, { resetForm }) => {
+        onSubmit={async ({title, body}, {resetForm}) => {
           setLoading(true);
           const payload = {
             title,
             body,
-            author: userData,
+            author: userData
           };
           try {
             await axios.post("/api/question", payload);
@@ -56,7 +56,7 @@ const NewQuestionPage = (): JSX.Element => {
               description:
                 "Your question has been successfully uploaded! Please wait for us to redirect you to the home page!",
               isClosable: true,
-              duration: 4000,
+              duration: 4000
             });
             resetForm();
             setTimeout(() => {
@@ -70,12 +70,12 @@ const NewQuestionPage = (): JSX.Element => {
               title: "Oh what a bummer!",
               description: "Something went wrong! :(",
               isClosable: true,
-              duration: 4000,
+              duration: 4000
             });
           }
         }}
       >
-        {({ values, handleChange, handleBlur, handleSubmit }) => (
+        {({values, handleChange, handleBlur, handleSubmit}) => (
           <form>
             <Stack spacing='3'>
               <Box>
@@ -118,5 +118,5 @@ export default NewQuestionPage;
 
 const formikInitialValues = {
   title: "",
-  body: "",
+  body: ""
 };
