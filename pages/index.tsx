@@ -16,11 +16,11 @@ const IndexPage = (): JSX.Element => {
   const setUserData = useUserData((state) => state.setUserData);
   const [user] = useUser();
 
-  // React.useEffect(() => {
-  //   if (user) {
-  //     setUserData(user);
-  //   }
-  // }, []);
+  React.useEffect(() => {
+    if (user) {
+      setUserData(user);
+    }
+  }, []);
 
   let indexOfLastQuestion = currPage * QUESTIONS_PER_PAGE;
   let indexOfFirstQuestion = indexOfLastQuestion - QUESTIONS_PER_PAGE;
