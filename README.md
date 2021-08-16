@@ -1,13 +1,12 @@
 ### CSQA
 
-A social media Q&A platform for developers and engineers! 🚀
+A social media Q&A platform for developers and engineers! 🚀 This platform is aimed for me to learn new database design system and ofc a platform for us, developers! :D 
 
 #### Features
 
 - [x] Post questions
 - [x] Comments!
 - [x] Upvote/ downvote questions
-- [ ] Follow users
 - [ ] Comment threads
 
 #### Tech stack
