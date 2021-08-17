@@ -1,20 +1,14 @@
-import {Request, Response, Router} from "express";
-import passport from "../config/passport";
+import {Router} from "express";
 import {
   getCurrentUser,
+  loginUser,
   logoutUser,
   signUpUser
 } from "../controllers/user.controller";
 
 const userRouter = Router();
 
-userRouter.post(
-  "/login",
-
-  passport.authenticate("local", (req: Request, res: Response) => {
-    return res.json({success: true, data: req.user});
-  })
-);
+userRouter.post("/login", loginUser);
 userRouter.get("/currentUser", getCurrentUser);
 userRouter.post("/signup", signUpUser);
 userRouter.delete("/logout", logoutUser);

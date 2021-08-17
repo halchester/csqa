@@ -1,4 +1,12 @@
-import {Box, Flex, IconButton, Link, Text, useToast} from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  Flex,
+  IconButton,
+  Link,
+  Text,
+  useToast
+} from "@chakra-ui/react";
 import * as React from "react";
 import moment from "moment";
 import {ArrowDownIcon, ArrowUpIcon} from "@chakra-ui/icons";
@@ -26,7 +34,7 @@ export const Question = ({question}: IProps): JSX.Element => {
       const payload = {user: userData, question, up: true};
 
       try {
-        await axios.post("/api/vote/upvote", payload);
+        await axios.post(`/api/question/up/${question.questionId}`, payload);
         setLoading(false);
       } catch ({
         response: {
@@ -50,7 +58,7 @@ export const Question = ({question}: IProps): JSX.Element => {
       setLoading(true);
       const payload = {user: userData, question, down: true};
       try {
-        await axios.post("/api/vote/downvote", payload);
+        await axios.post(`/api/question/down/${question.questionId}`, payload);
         setLoading(false);
       } catch ({
         response: {
@@ -67,16 +75,24 @@ export const Question = ({question}: IProps): JSX.Element => {
   };
 
   const calculatePoint = (up: number, down: number) => up - down;
-
+  console.log(question);
   return (
     question && (
       <Box mb='4'>
         <Flex justifyContent='space-between' alignItems='center'>
-          <Text fontSize='lg'>
-            <Link href={`/question/${question.questionId}`}>
-              {question.title}
-            </Link>
-          </Text>
+          <Box>
+            <Flex alignItems='center'>
+              <Text fontSize='lg' as='span'>
+                <Link href={`/question/${question.questionId}`}>
+                  {question.title}
+                </Link>
+              </Text>
+              &nbsp;
+              <Badge colorScheme='twitter' variant='outline'>
+                {question.comments.length} comments
+              </Badge>
+            </Flex>
+          </Box>
           <Box>
             <Box as='span'>
               {userData ? (

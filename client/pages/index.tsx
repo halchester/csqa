@@ -11,7 +11,7 @@ interface IProps {
   questions: QuestionT[];
 }
 
-const IndexPage = ({questions}: IProps) => {
+const IndexPage = ({questions}: IProps): JSX.Element => {
   const [currPage, setCurrPage] = React.useState(1);
   const QUESTIONS_PER_PAGE = 8;
 
@@ -23,15 +23,20 @@ const IndexPage = ({questions}: IProps) => {
   );
 
   const paginate = (num: number) => setCurrPage(num);
+
   return (
     <Layout>
       {questions ? (
         <>
-          {questions.map((q: QuestionT, idx: number) => (
+          {currQuestions.map((q: QuestionT, idx: number) => (
             <Question question={q} key={idx} />
           ))}
           {questions.length > 8 ? (
-            <Pagination totalQuestions={questions.length} paginate={paginate} />
+            <Pagination
+              totalQuestions={questions.length}
+              paginate={paginate}
+              currPage={currPage}
+            />
           ) : null}
         </>
       ) : null}

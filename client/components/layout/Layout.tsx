@@ -1,5 +1,5 @@
 import {Flex, Link, Text, Box} from "@chakra-ui/react";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useUser} from "../../hooks/user";
 import {useUserData} from "../../store/userStore";
 import {User} from "../../types/common";
@@ -13,8 +13,6 @@ export const Layout = ({children}: IProps): JSX.Element => {
   const setUserData = useUserData((state) => state.setUserData);
   const [data] = useUser();
   const userData = useUserData((state) => state.userData);
-
-  console.log("llayout ->>>>>", userData);
 
   React.useEffect(() => {
     if (data) {
@@ -69,6 +67,14 @@ const Header = () => {
 };
 
 const Config = ({userData}: {userData: User | null}) => {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (userData) {
+      setShow(true);
+    }
+  }, [userData]);
+
   return (
     <Flex
       justifyContent='space-around'
@@ -76,7 +82,7 @@ const Config = ({userData}: {userData: User | null}) => {
       maxWidth='md'
       mx='auto'
     >
-      {userData ? (
+      {show ? (
         <SmallText link='/bio'>{userData?.username} / Logout</SmallText>
       ) : (
         <SmallText link='/login'>Log In/ Sign Up</SmallText>

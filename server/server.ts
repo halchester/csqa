@@ -4,7 +4,6 @@ import {options} from "./utils/index";
 import dotenv from "dotenv";
 import cors from "cors";
 import {join} from "path";
-import session from "express-session";
 
 dotenv.config();
 
@@ -24,11 +23,20 @@ app.use(function (_req, res, next) {
 
 // Middleware imports
 import "./config/passport";
-import sessionMiddleware from "./config/session";
-import passport from "./config/passport";
+import session from "express-session";
+import cookieParser from "cookie-parser";
+import passport from "passport";
+import passportCus from "./config/passport";
 
 app
-  .use(sessionMiddleware)
+  .use(
+    session({
+      secret: process.env.SESSION_SECRET as string,
+      resave: true,
+      saveUninitialized: true
+    })
+  )
+  .use(cookieParser(process.env.SESSION_SECRET as string))
   .use(passport.initialize())
   .use(passport.session())
   .use(
@@ -38,6 +46,7 @@ app
       saveUninitialized: false
     })
   );
+passportCus(passport);
 
 // Route imports
 import userRouter from "./routers/user.route";

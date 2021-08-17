@@ -3,7 +3,7 @@ import Comment from "../models/Comment";
 import Question from "../models/Question";
 
 export const addComment = async (req: Request, res: Response) => {
-  const {questionId} = req.query;
+  const {questionId} = req.params;
   const {comment, author} = req.body;
 
   try {

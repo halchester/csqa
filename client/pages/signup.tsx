@@ -40,7 +40,7 @@ const SignupPage = (): JSX.Element => {
           setLoading(true);
           const payload = {fullName, email, password, username};
           try {
-            const response = await axios.post("/api/auth/signup", payload);
+            const response = await axios.post("/api/signup", payload);
             toast({
               status: "success",
               title: "Account registered!",

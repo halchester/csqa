@@ -12,6 +12,24 @@ export const getAllQuestions = async (req: Request, res: Response) => {
   }
 };
 
+export const getQuestionDetail = async (req: Request, res: Response) => {
+  try {
+    const {questionId} = req.params;
+    const data = await Question.findOne({questionId: questionId as string})
+      .populate("author")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "author"
+        }
+      });
+    return res.status(200).json({success: true, data});
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({success: false, error: err});
+  }
+};
+
 export const addQuestion = async (req: Request, res: Response) => {
   try {
     const newQ = new Question(req.body);

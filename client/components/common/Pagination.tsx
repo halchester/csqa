@@ -6,9 +6,14 @@ const QUESTIONS_PER_PAGE = 8;
 interface IProps {
   totalQuestions: number;
   paginate: (num: number) => void;
+  currPage: number;
 }
 
-export const Pagination = ({totalQuestions, paginate}: IProps): JSX.Element => {
+export const Pagination = ({
+  totalQuestions,
+  paginate,
+  currPage
+}: IProps): JSX.Element => {
   let numbers = [];
   for (let i = 1; i <= Math.ceil(totalQuestions / QUESTIONS_PER_PAGE); i++) {
     numbers.push(i);
@@ -21,8 +26,8 @@ export const Pagination = ({totalQuestions, paginate}: IProps): JSX.Element => {
           key={num}
           onClick={() => paginate(num)}
           mx='1'
-          size='sm'
-          colorScheme='green'
+          size='xs'
+          colorScheme={currPage === num ? "twitter" : null}
         >
           {num}
         </Button>

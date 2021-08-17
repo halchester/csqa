@@ -19,11 +19,13 @@ import axios from "../lib/api";
 import {useRouter} from "next/dist/client/router";
 import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
 import {loginFormValidation} from "../lib/formValidation";
+import {useUserData} from "../store/userStore";
 
 const LoginPage = (): JSX.Element => {
   const [loading, setLoading] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
   const router = useRouter();
+  const setUserData = useUserData((state) => state.setUserData);
   const toast = useToast();
 
   const togglePassword = () => setShowPassword(!showPassword);
@@ -46,14 +48,16 @@ const LoginPage = (): JSX.Element => {
           const payload = {username, password};
 
           try {
-            const response = await axios.post("/api/login", payload);
-            console.log(response);
-            if (response.data.data) {
+            const {
+              data: {data}
+            } = await axios.post("/api/login", payload);
+            if (data) {
+              setUserData(data);
               router.push("/");
             }
             setLoading(false);
           } catch (err) {
-            console.log(err);
+            console.log(err.response);
             toast({
               status: "error",
               title: "Error!",
@@ -126,6 +130,7 @@ const LoginPage = (): JSX.Element => {
                 </FormHelperText>
               </FormControl>
               <Button
+                type='submit'
                 onClick={() => handleSubmit()}
                 isFullWidth
                 colorScheme='green'

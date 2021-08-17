@@ -22,13 +22,12 @@ const BioPage = (): JSX.Element => {
   const removeUserData = useUserData((state) => state.removeUserData);
   const router = useRouter();
   const userData = useUserData((state) => state.userData);
-  // const toast = useToast();
   const calculatePoint = (up: number, down: number) => up - down;
 
   const logoutUser = async () => {
     setLoading(true);
     try {
-      await axios.delete("/api/auth");
+      await axios.delete("/api/logout");
       removeUserData();
       setLoading(false);
       router.push("/");
