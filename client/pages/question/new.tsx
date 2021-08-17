@@ -18,11 +18,12 @@ import {useUserData} from "../../store/userStore";
 const NewQuestionPage = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const userData = useUserData((state) => state.userData);
+  const token = useUserData((state) => state.token);
   const toast = useToast();
   const router = useRouter();
 
   useEffect(() => {
-    if (!userData) {
+    if (!userData && !token) {
       router.push("/login");
     }
   }, [userData]);

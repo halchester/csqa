@@ -1,6 +1,6 @@
 import {Flex, Link, Text, Box} from "@chakra-ui/react";
 import React, {useEffect, useState} from "react";
-import {useUser} from "../../hooks/user";
+// import {useUser} from "../../hooks/user";
 import {useUserData} from "../../store/userStore";
 import {User} from "../../types/common";
 import {SmallText} from "../utils/SmallText";
@@ -10,15 +10,7 @@ interface IProps {
 }
 
 export const Layout = ({children}: IProps): JSX.Element => {
-  const setUserData = useUserData((state) => state.setUserData);
-  const [data] = useUser();
   const userData = useUserData((state) => state.userData);
-
-  React.useEffect(() => {
-    if (data) {
-      setUserData(data);
-    }
-  }, []);
 
   return (
     <>

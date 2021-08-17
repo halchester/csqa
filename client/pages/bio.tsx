@@ -11,8 +11,6 @@ import {
 } from "@chakra-ui/react";
 import React, {useState} from "react";
 import {Layout} from "../components/layout/Layout";
-// import {Question} from "../types/common";
-import axios from "../lib/api";
 import {useRouter} from "next/dist/client/router";
 import {useUserData} from "../store/userStore";
 import {Question} from "../types/common";
@@ -20,15 +18,17 @@ import {Question} from "../types/common";
 const BioPage = (): JSX.Element => {
   const [loading, setLoading] = useState(false);
   const removeUserData = useUserData((state) => state.removeUserData);
+  const removeToken = useUserData((state) => state.removeToken);
   const router = useRouter();
   const userData = useUserData((state) => state.userData);
+
   const calculatePoint = (up: number, down: number) => up - down;
 
   const logoutUser = async () => {
     setLoading(true);
     try {
-      await axios.delete("/api/logout");
       removeUserData();
+      removeToken();
       setLoading(false);
       router.push("/");
     } catch (err) {
@@ -40,7 +40,7 @@ const BioPage = (): JSX.Element => {
   return (
     <Layout>
       <>
-        <Text>{userData?.fullName}</Text>
+        <Text fontWeight='semibold'>{userData?.fullName}</Text>
         <Text as='span' fontSize='sm' color='gray.500'>
           {userData?.username} |
         </Text>
