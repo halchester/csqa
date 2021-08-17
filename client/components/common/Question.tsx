@@ -75,7 +75,6 @@ export const Question = ({question}: IProps): JSX.Element => {
   };
 
   const calculatePoint = (up: number, down: number) => up - down;
-  console.log(question);
   return (
     question && (
       <Box mb='4'>

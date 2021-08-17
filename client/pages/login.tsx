@@ -57,7 +57,6 @@ const LoginPage = (): JSX.Element => {
             }
             setLoading(false);
           } catch (err) {
-            console.log(err.response);
             toast({
               status: "error",
               title: "Error!",
