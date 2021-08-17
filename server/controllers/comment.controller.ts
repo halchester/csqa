@@ -12,7 +12,7 @@ export const addComment = async (req: Request, res: Response) => {
 
     await Question.findOne({questionId: questionId as string})
       .populate("comments")
-      .exec(async (error) => {
+      .exec(async (error): Promise<any> => {
         if (error) {
           console.log(error);
           return res.status(400).json({success: false, error});

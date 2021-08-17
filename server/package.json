@@ -5,8 +5,8 @@
   "author": "Chester",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node server.ts",
-    "dev": "nodemon -x ts-node server.ts"
+    "dev": "nodemon -x ts-node server.ts",
+    "start": "ts-node server.ts"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -19,7 +19,10 @@
     "mongoose": "^5.13.7",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.16",
+    "ts-node": "^10.2.0",
+    "tslib": "^2.3.1",
+    "typescript": "^4.3.5"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
