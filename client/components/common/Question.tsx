@@ -87,9 +87,11 @@ export const Question = ({question}: IProps): JSX.Element => {
                 </Link>
               </Text>
               &nbsp;
-              <Badge colorScheme='twitter' variant='outline'>
-                {question.comments.length} comments
-              </Badge>
+              {question.comments.length > 0 ? (
+                <Badge colorScheme='twitter' variant='outline'>
+                  {question.comments.length} comments
+                </Badge>
+              ) : null}
             </Flex>
           </Box>
           <Box>
