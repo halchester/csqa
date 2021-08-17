@@ -2,7 +2,7 @@ import {Request, Response} from "express";
 import bcrypt from "bcrypt";
 import {checkFields, findUserByEmail, findUserByUsername} from "../utils/user";
 import User from "../models/User";
-import passport from "passport";
+import jwt from "jsonwebtoken";
 
 export const signUpUser = async (req: Request, res: Response): Promise<any> => {
   const {fullName, email, username, password} = req.body;
@@ -51,39 +51,44 @@ export const signUpUser = async (req: Request, res: Response): Promise<any> => {
   }
 };
 
-export const loginUser = async (req: Request, res: Response, next: any) => {
-  passport.authenticate("local", (err, user) => {
-    if (err) {
-      console.log(err);
-    }
+export const loginUser = async (req: Request, res: Response) => {
+  const {username, password} = req.body;
+  try {
+    const user = await findUserByUsername(username);
     if (!user) {
-      res.status(403).json({message: "No user Exists!"});
-    } else {
-      req.logIn(user, async (err) => {
-        if (err) {
-          console.log(err);
-        }
-
-        const userdata = await User.findOne({uniqueId: user.uniqueId}).populate(
-          {
-            path: "questions"
-          }
-        );
-
-        res.status(200).json({data: userdata});
+      return res.status(403).json({
+        success: false,
+        error: "User does not exist!",
+        data: {}
       });
     }
-  })(req, res, next);
-};
+    const passwordIsValid = await bcrypt.compare(password, user.password);
+    if (!passwordIsValid) {
+      return res
+        .status(403)
+        .json({success: false, error: "Invalid password", data: {}});
+    }
 
-export const getCurrentUser = async (req: any, res: Response) => {
-  if (!req.user) return res.json({user: null});
-  await User.findOne({uniqueId: req.user.uniqueId})
-    .populate({path: "questions"})
-    .then((data) => res.json({user: data}));
-};
+    let token = jwt.sign(
+      {
+        credentials: `${user.userId}.${user.username}`
+      },
+      process.env.JWT_SECRET as string
+    );
 
-export const logoutUser = (req: Request, res: Response): any => {
-  req.logout();
-  res.status(204).end();
+    const userData = await User.findOne({userId: user.userId}).populate({
+      path: "questions"
+    });
+
+    const credentials = {
+      userData,
+      token
+    };
+    return res.status(200).json({success: true, data: credentials});
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(403)
+      .json({success: false, data: "Username or password is incorrect"});
+  }
 };

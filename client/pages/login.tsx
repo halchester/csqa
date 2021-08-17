@@ -26,6 +26,7 @@ const LoginPage = (): JSX.Element => {
   const [showPassword, setShowPassword] = React.useState(false);
   const router = useRouter();
   const setUserData = useUserData((state) => state.setUserData);
+  const setToken = useUserData((state) => state.setToken);
   const toast = useToast();
 
   const togglePassword = () => setShowPassword(!showPassword);
@@ -51,12 +52,15 @@ const LoginPage = (): JSX.Element => {
             const {
               data: {data}
             } = await axios.post("/api/login", payload);
+
             if (data) {
-              setUserData(data);
+              setUserData(data.userData);
+              setToken(data.token);
               router.push("/");
             }
             setLoading(false);
           } catch (err) {
+            console.log(err);
             toast({
               status: "error",
               title: "Error!",
