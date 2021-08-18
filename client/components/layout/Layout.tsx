@@ -73,6 +73,7 @@ const Config = ({userData}: {userData: User | null}) => {
       alignItems='center'
       maxWidth='md'
       mx='auto'
+      mb='4'
     >
       {show ? (
         <SmallText link='/bio'>{userData?.username} / Logout</SmallText>

@@ -8,24 +8,25 @@ So what is CSQA? CSQA is a Progressive Web App aimed for those who wanna ask sil
 
 - [x] Posting questions
 - [x] User login and signing up
-- [ ] Connecting to your github profile
 - [x] Voting questions
 - [ ] <s>Banning users ( jk, this is not stackoverflow lol, but be nice :))</s>
 - [x] Comments on questions
+- [x] Searching questions
 - [ ] Comments thread
 - [ ] Leader board
+- [ ] Connecting to your github profile
 
 ### Tech stack
 
 I'm a big fan of react and I mainly used React and Node for both frontend and backend. (I was gonna use Next fullstack but the code refactoring sucks with it so changed back to MERN 🤷🏼‍♂️)
 
 - React (Next)
-- Node 
+- Node
 - Express
 - Typescript❤️ (ofc who doesn't love TS?)
 - Chakra UI (elegent CSS framework)
-- Formik 
-- Vercel 
+- Formik
+- Vercel
 - mongodb (the only db I know)
 
 You can checkout the rest in [package.json](./client/package.json).
