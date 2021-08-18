@@ -4,6 +4,8 @@
 
 So what is CSQA? CSQA is a Progressive Web App aimed for those who wanna ask silly questions but afraid to get downvoted on stackoverflow, on CSQA, you can ask any questions related to dev, life, crypto, literally everything! (But your question can still get downvoted! 🤐)
 
+<a href="https://www.producthunt.com/posts/csqa?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-csqa" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=308954&theme=light" alt="csqa - Forum for developers or anyone starting their dev journey! | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+
 ### Features of csqa
 
 - [x] Posting questions
