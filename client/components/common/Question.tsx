@@ -1,12 +1,4 @@
-import {
-  Badge,
-  Box,
-  Flex,
-  IconButton,
-  Link,
-  Text,
-  useToast
-} from "@chakra-ui/react";
+import {Box, Flex, IconButton, Link, Text, useToast} from "@chakra-ui/react";
 import * as React from "react";
 import moment from "moment";
 import {ArrowDownIcon, ArrowUpIcon} from "@chakra-ui/icons";
@@ -81,17 +73,19 @@ export const Question = ({question}: IProps): JSX.Element => {
         <Flex justifyContent='space-between' alignItems='center'>
           <Box>
             <Flex alignItems='center'>
-              <Text fontSize='lg' as='span'>
+              <Text fontSize='md' fontWeight='semibold' as='span'>
                 <Link href={`/question/${question.questionId}`}>
-                  {question.title}
+                  {question.title.length > 25
+                    ? `${question.title.slice(0, 25)} ... `
+                    : question.title}
                 </Link>
               </Text>
-              &nbsp;
-              {question.comments.length > 0 ? (
-                <Badge colorScheme='twitter' variant='outline'>
-                  {question.comments.length} comments
+
+              {/* {question.comments.length > 0 ? (
+                <Badge colorScheme='twitter' variant='outline' size='sm' ml='1'>
+                  {question.comments.length} cmts
                 </Badge>
-              ) : null}
+              ) : null} */}
             </Flex>
           </Box>
           <Box>
@@ -114,7 +108,7 @@ export const Question = ({question}: IProps): JSX.Element => {
                     as='span'
                     fontSize='sm'
                     color='gray.500'
-                    mx='2'
+                    mx='1.5'
                     fontWeight='bold'
                   >
                     {calculatePoint(
@@ -139,6 +133,11 @@ export const Question = ({question}: IProps): JSX.Element => {
             </Box>
           </Box>
         </Flex>
+        {question.comments.length > 0 ? (
+          <Text fontSize='sm' color='messenger.500' fontWeight='semibold'>
+            {question.comments.length} comments
+          </Text>
+        ) : null}
         <Text as='span' fontSize='sm' color='gray.500'>
           {" "}
           {question.author.username}

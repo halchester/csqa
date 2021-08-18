@@ -4,7 +4,7 @@ import User from "../models/User";
 
 export const getAllQuestions = async (req: Request, res: Response) => {
   try {
-    const data = await Question.find().populate("author");
+    const data = await Question.find().populate("author").sort({createdAt: -1});
     return res.status(200).json({success: true, data});
   } catch (err) {
     console.log(err);
